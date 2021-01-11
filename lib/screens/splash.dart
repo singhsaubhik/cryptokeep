@@ -1,6 +1,7 @@
 import 'package:cryptokeep/auth/auth.dart';
+import 'package:cryptokeep/components/splash_component.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -8,30 +9,34 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var isAuthenticated = false;
+  var enablePasswordAuth = false;
+  TextEditingController _controller = TextEditingController(text: "");
 
   @override
   void initState() {
     super.initState();
-    // Future.delayed(Duration(seconds: 3), (){
-    //   Navigator.of(context).pushReplacementNamed("/home");
-    // });
-    AppAuthentication().initAuth().then((value) => {
-          if (value)
-            {
-              Future.delayed(Duration(milliseconds: 400), () {
-                Navigator.of(context).pushReplacementNamed("/home");
-              })
-            }else{
-
-          }
-        });
+    AppAuthentication()
+        .initAuth()
+        .then((value) => handleBiometricsAuthentication(value));
   }
 
-  void handleAuthentication() {
-    // setState(() {
-    //   isAuthenticated = !isAuthenticated;
-    // });
+  void handleBiometricsAuthentication(value) {
+    if (value) {
+      Future.delayed(Duration(milliseconds: 400), () {
+        Navigator.of(context).pushReplacementNamed("/home");
+      });
+    } else {
+      setState(() {
+        enablePasswordAuth = !enablePasswordAuth;
+      });
+    }
+  }
+
+  void handleSubmit() {
+    String password = _controller.value.text;
+    if (password == "1234") {
+      Navigator.of(context).pushReplacementNamed("/home");
+    }
   }
 
   @override
@@ -49,14 +54,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: 120,
                 width: 120,
               ),
-              Text(
-                "CryptoKeep",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 40,
-                ),
-              )
+              SizedBox(
+                height: 20,
+              ),
+              getTextBoxOrTitle(context, _controller, handleSubmit, enablePasswordAuth),
             ],
           ),
         ),

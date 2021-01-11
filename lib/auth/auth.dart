@@ -23,6 +23,7 @@ class AppAuthentication {
       canCheckBiometrics = await this._auth.canCheckBiometrics;
     } on PlatformException catch (e) {
       print(e);
+    //  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
 
     return canCheckBiometrics;
@@ -32,10 +33,10 @@ class AppAuthentication {
     bool response = false;
     try {
       response = await this._auth.authenticateWithBiometrics(
-        localizedReason: 'Scan your fingerprint to authenticate',
-        useErrorDialogs: true,
-        stickyAuth: true,
-      );
+            localizedReason: 'Scan your fingerprint to authenticate',
+            useErrorDialogs: true,
+            stickyAuth: true,
+          );
     } on PlatformException catch (e) {
       print(e);
       return false;
