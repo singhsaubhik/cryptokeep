@@ -1,4 +1,4 @@
-name: Dart
+name: Code Test
 
 on:
   push:
@@ -8,43 +8,37 @@ on:
 
 jobs:
   build:
+    name: Code test
     runs-on: ubuntu-latest
-
-    # Note that this workflow uses the latest stable version of the Dart SDK.
-    # Docker images for other release channels - like dev and beta - are also
-    # available. See https://hub.docker.com/r/google/dart/ for the available
-    # images.
-    container:
-      image:  google/dart:latest
-
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
 
-      # Setup the flutter environment.
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-        # flutter-version: '1.12.x' # you can also specify exact version of flutter
-        
-      - name: Get the dependencies of project
-        run: flutter pub get
+    # Setup the flutter environment.
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable' # 'dev', 'alpha', default to: 'stable'
+      # flutter-version: '1.12.x' # you can also specify exact version of flutter
+      
+    - name: Get the dependencies of project
+      run: flutter pub get
 
-      - name: Check formatting issue
-        run: flutter format --set-exit-if-changed .
+    - name: Check formatting issue
+      run: flutter format --set-exit-if-changed .
 
-      - name: Static Analyze Dart code
-        run: flutter analyze .
+    - name: Static Analyze Dart code
+      run: flutter analyze .
 
-      - name: Test flutter
-        run: flutter test
+    - name: Test flutter
+      run: flutter test
 
-      - name: Build APK
-        run: flutter build apk
+    # TODO: This will implemented fro release branch
+    # - name: Build APK
+    #   run: flutter build apk
 
-      - uses: actions/upload-artifact@v1
-        with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+    # - uses: actions/upload-artifact@v1
+    #   with:
+    #     name: release-apk
+    #     path: build/app/outputs/apk/release/app-release.apk
