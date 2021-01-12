@@ -23,7 +23,7 @@ class AppAuthentication {
       canCheckBiometrics = await this._auth.canCheckBiometrics;
     } on PlatformException catch (e) {
       print(e);
-    //  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      //  SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
 
     return canCheckBiometrics;
