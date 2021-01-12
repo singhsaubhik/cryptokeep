@@ -1,9 +1,7 @@
 import 'package:cryptokeep/routes.dart';
-import 'package:cryptokeep/screens/home_page.dart';
 import 'package:cryptokeep/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
