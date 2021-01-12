@@ -1,7 +1,7 @@
 import 'package:cryptokeep/auth/auth.dart';
 import 'package:cryptokeep/components/splash_component.dart';
+import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -27,16 +27,21 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     } else {
       setState(() {
-        enablePasswordAuth = !enablePasswordAuth;
+        enablePasswordAuth = true;
       });
     }
   }
 
-  void handleSubmit() {
+  void handleSubmit(AuthType authType) {
     String password = _controller.value.text;
-    if (password == "1234") {
-      Navigator.of(context).pushReplacementNamed("/home");
-    }
+    var isAuthenticated =
+        authType == AuthType.password ? handlePasswordAuth(password) : true;
+
+    if (isAuthenticated) Navigator.of(context).pushReplacementNamed("/home");
+  }
+
+  bool handlePasswordAuth(String password) {
+    return password != "1234";
   }
 
   @override
@@ -57,7 +62,13 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(
                 height: 20,
               ),
-              getTextBoxOrTitle(context, _controller, handleSubmit, enablePasswordAuth),
+              getTextBoxOrTitle(
+                context,
+                enablePasswordAuth,
+                _controller,
+                handleSubmit,
+                handleBiometricsAuthentication,
+              ),
             ],
           ),
         ),
