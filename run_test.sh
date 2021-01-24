@@ -13,3 +13,5 @@ echo
 
 echo "Running flutter test..."
 flutter test
+
+echo "All checks passed"

@@ -1,7 +1,5 @@
 import 'package:cryptokeep/components/home_component.dart';
-import 'package:cryptokeep/themes/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:cryptokeep/utils/constants.dart';
 
 class HomePage extends StatelessWidget {
   @override

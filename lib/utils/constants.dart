@@ -10,7 +10,6 @@ final primaryColor = Colors.blue;
 final primaryTextColor = Colors.white;
 final secondaryColor = Colors.white70;
 
-
 // Temp data
 
 final kPasswordData = [
