@@ -63,7 +63,7 @@ Column getPasswordInput(
             hintText: "Enter master password",
             hintStyle: TextStyle(color: Colors.grey),
           ),
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.start,
         ),
       ),
       SizedBox(

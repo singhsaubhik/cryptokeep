@@ -15,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+
     AppAuthentication()
         .initAuth()
         .then((value) => handleBiometricsAuthentication(value));
@@ -41,11 +42,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   bool handlePasswordAuth(String password) {
-    return password != "1234";
+    return password == "1234";
   }
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         body: Container(

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       routes: appRoutes,
+      initialRoute: "/splash",
     );
   }
 }
