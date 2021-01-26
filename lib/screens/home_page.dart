@@ -8,24 +8,22 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           primary: false,
+          title: Text("Home"),
+          titleSpacing: 20,
           elevation: 0,
           actions: [
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(20.0),
               child: Icon(Icons.search),
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+        ),
         body: Column(
           children: [
-            Text(
-              "Hi, there",
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 40,
-              ),
-            ),
             PasswordGrid(),
           ],
         ),

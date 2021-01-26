@@ -1,3 +1,4 @@
+import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 
 final backgroundColor = Color(0xFF2C2D31);
@@ -13,32 +14,44 @@ final secondaryColor = Colors.white70;
 // Temp data
 
 final kPasswordData = [
-  {
-    "_id": "1",
-    "name": "Google",
-    "password": "12345",
-    "createdAt": "10-12-2020 06:20:12",
-    "updatedAt": "10-12-2020 06:40:45"
-  },
-  {
-    "_id": "2",
-    "name": "Amazon",
-    "password": "123456",
-    "createdAt": "10-12-2020 06:20:12",
-    "updatedAt": "10-12-2020 06:40:45"
-  },
-  {
-    "_id": "3",
-    "name": "Flipkart",
-    "password": "123456",
-    "createdAt": "10-12-2020 06:20:12",
-    "updatedAt": "10-12-2020 06:40:45"
-  },
-  {
-    "_id": "4",
-    "name": "Facebook",
-    "password": "123456",
-    "createdAt": "10-12-2020 06:20:12",
-    "updatedAt": "10-12-2020 06:40:45"
-  },
+  Password(
+    id: "1",
+    name: "Google",
+    password: "123456",
+    username: "singh",
+    createdAt: DateTime.now().toString(),
+    updatedAt: "",
+  ),
+  Password(
+    id: "1",
+    name: "Amazon",
+    password: "123456",
+    username: "singh",
+    createdAt: DateTime.now().toString(),
+    updatedAt: "",
+  ),
+  Password(
+    id: "1",
+    name: "Flipkart",
+    password: "123456",
+    username: "singh",
+    createdAt: DateTime.now().toString(),
+    updatedAt: "",
+  ),
+  Password(
+    id: "1",
+    name: "Facebook",
+    password: "123456",
+    username: "singh",
+    createdAt: DateTime.now().toString(),
+    updatedAt: "",
+  ),
+  Password(
+    id: "1",
+    name: "Instagram",
+    password: "123456",
+    username: "singh",
+    createdAt: DateTime.now().toString(),
+    updatedAt: "",
+  )
 ];

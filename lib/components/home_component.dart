@@ -1,5 +1,6 @@
-import 'package:cryptokeep/utils/constants.dart';
+import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PasswordGrid extends StatelessWidget {
   const PasswordGrid({
@@ -8,6 +9,8 @@ class PasswordGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final passwordProvider = Provider.of<PasswordProvider>(context);
+
     return Expanded(
       child: GridView.count(
         primary: false,
@@ -16,8 +19,8 @@ class PasswordGrid extends StatelessWidget {
         mainAxisSpacing: 10,
         crossAxisCount: 2,
         children: <Widget>[
-          for (var data in kPasswordData)
-            PasswordCard(Key(data["_id"]), data["name"])
+          for (var data in passwordProvider.todoList())
+            PasswordCard(Key(data.id), data.name)
         ],
       ),
     );
@@ -71,15 +74,15 @@ class PasswordCard extends StatelessWidget {
           ),
           Spacer(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ButtonWidget(
                 "Edit",
-                borderColor: Colors.blue,
+                borderColor: Colors.grey,
               ),
               ButtonWidget(
                 "Copy",
-                borderColor: Colors.green,
+                borderColor: Colors.blue[200],
               ),
             ],
           )
