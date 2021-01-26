@@ -12,6 +12,8 @@ class AppTheme {
         bodyText1: TextStyle(color: Colors.white),
         headline1: TextStyle(color: Colors.white)),
     visualDensity: VisualDensity.adaptivePlatformDensity,
+    cursorColor: Colors.white70,
+    hintColor: Colors.white60
   );
 
   static AppBar customAppBar = AppBar(
