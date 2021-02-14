@@ -1,6 +1,5 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
-import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/password_model.dart';
 import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,30 @@ import 'package:provider/provider.dart';
 import 'package:cryptokeep/repository/respository.dart';
 
 class HomePage extends StatelessWidget {
+  void handleAddButton(BuildContext context) async {
+    var value = await showDialog(
+        context: context,
+        builder: (context) {
+          return AddPasswordDialog();
+        });
+
+    print(value);
+
+    if (value != null) {
+      Repository.instance(context).addPassword(
+        Password(
+          name: value["name"],
+          username: value["username"],
+          password: value["password"],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<PasswordProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -18,34 +39,19 @@ class HomePage extends StatelessWidget {
           titleSpacing: 24,
           elevation: 0,
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            var value = await showDialog(
-                context: context,
-                builder: (context) {
-                  return AddPasswordDialog();
-                });
-
-            print(value);
-
-            if (value != null) {
-              print("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
-              Repository.instance(context).addPassword(
-                Password(
-                  name: value["name"],
-                  username: value["username"],
-                  password: value["password"],
-                ),
-              );
-            }
-
-            print(value);
-          },
-          child: Icon(Icons.add),
+        floatingActionButton: Visibility(
+          visible: provider.showAddButton,
+          child: FloatingActionButton(
+            onPressed: () => handleAddButton(context),
+            child: Icon(Icons.add),
+          ),
         ),
         body: Column(
           children: [
             SearchBar(),
+            SizedBox(
+              height: 15,
+            ),
             PasswordGrid(),
           ],
         ),

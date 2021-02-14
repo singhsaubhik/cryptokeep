@@ -1,8 +1,6 @@
-import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:cryptokeep/repository/respository.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchBar extends StatelessWidget {
   final controller = TextEditingController();
@@ -21,14 +19,15 @@ class SearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
+              onChanged: (value) => Repository.instance(context).filter(value),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search Password",
                 suffixIcon: IconButton(
+                  splashRadius: 1,
+                  color: secondaryColor,
                   onPressed: () {
-                    if (controller.value.text != "")
-                      Repository.instance(context).filter("");
-
+                    Repository.instance(context).filter("");
                     controller.clear();
                     FocusScope.of(context).unfocus();
                   },
@@ -39,16 +38,6 @@ class SearchBar extends StatelessWidget {
                 color: Colors.white60,
               ),
             ),
-          ),
-          IconButton(
-            tooltip: "Search",
-            splashRadius: 1,
-            icon: Icon(
-              Icons.search,
-              color: primaryTextColor,
-            ),
-            onPressed: () =>
-                Repository.instance(context).filter(controller.value.text),
           ),
         ],
       ),

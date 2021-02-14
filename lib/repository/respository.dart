@@ -26,13 +26,6 @@ class Repository {
   }
 
   void filter(String searchText) async {
-    List<Password> _list = [];
-    this._provider.setIsLoading(true);
-    var response = await DBHelper.instance.find(search: searchText);
-
-    response.forEach((element) {
-      _list.add(Password.fromMap(element));
-    });
-    this._provider.updateList(_list, isLoading: false);
+    _provider.filter(searchText);
   }
 }

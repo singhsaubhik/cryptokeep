@@ -1,15 +1,25 @@
 import 'dart:collection';
 import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/password_model.dart';
-import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 
 class PasswordProvider extends ChangeNotifier {
-  bool _isDBLoaded = false;
-  List<Password> _list = [];
-  bool _isLoading = false;
+  /// Local button state
+  ///
+  bool _showAddButton = true;
 
-  bool shouldLoadFromDB() => _list.isEmpty && _isDBLoaded;
+  get showAddButton => _showAddButton;
+
+  void setShowAddButton(bool val) {
+    _showAddButton = val;
+    notifyListeners();
+  }
+
+  ///
+
+  bool _isDBLoaded = false;
+  List<Password> _list = [], _initialList = [];
+  bool _isLoading = false;
 
   void _loadFromDB() async {
     _isLoading = true;
@@ -18,6 +28,7 @@ class PasswordProvider extends ChangeNotifier {
     for (var v in response) {
       _list.add(Password.fromMap(v));
     }
+    _initialList = _list;
     _isLoading = false;
     _isDBLoaded = true;
     notifyListeners();
@@ -36,12 +47,9 @@ class PasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  get isDBLoaded => _isDBLoaded;
-
-  set setIsDBLoaded(value) => _isDBLoaded = value;
-
   void add(Password password, {isLoading}) {
     _list.add(password);
+    _initialList.add(password);
     if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
   }
@@ -53,14 +61,11 @@ class PasswordProvider extends ChangeNotifier {
   }
 
   void filter(String text) {
-    print(text);
-    print(_list);
-    final list = kPasswordData
+    _list = _initialList
         .where((element) =>
             element.name.toLowerCase().contains(text.toLowerCase()))
         .toList();
 
-    _list = list;
     notifyListeners();
   }
 }

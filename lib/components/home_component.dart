@@ -1,4 +1,3 @@
-import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/password_model.dart';
 import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,15 @@ class PasswordGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<PasswordProvider>(context);
+    final _controller = ScrollController();
+
+    _controller.addListener(() {
+      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+        provider.setShowAddButton(false);
+      } else {
+        provider.setShowAddButton(true);
+      }
+    });
 
     return provider.isLoading
         ? Center(
@@ -17,8 +25,8 @@ class PasswordGrid extends StatelessWidget {
           )
         : Expanded(
             child: GridView.count(
-              primary: false,
-              padding: const EdgeInsets.all(20),
+              controller: _controller,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               crossAxisCount: 2,

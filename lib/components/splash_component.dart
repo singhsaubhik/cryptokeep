@@ -51,7 +51,7 @@ Column getPasswordInput(
             suffixIcon: GestureDetector(
               onTap: () => onSubmit(AuthType.password),
               child: Icon(
-                Icons.send_rounded,
+                Icons.lock_open_outlined,
                 color: Colors.white70,
               ),
             ),
