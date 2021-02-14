@@ -1,4 +1,5 @@
 import 'package:cryptokeep/provider/password_provider.dart';
+import 'package:cryptokeep/repository/respository.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,8 +9,6 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PasswordProvider>(context);
-
     return Container(
       height: 50,
       width: MediaQuery.of(context).size.width * .9,
@@ -25,6 +24,16 @@ class SearchBar extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search Password",
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    if (controller.value.text != "")
+                      Repository.instance(context).filter("");
+
+                    controller.clear();
+                    FocusScope.of(context).unfocus();
+                  },
+                  icon: Icon(Icons.clear),
+                ),
               ),
               style: TextStyle(
                 color: Colors.white60,
@@ -32,14 +41,15 @@ class SearchBar extends StatelessWidget {
             ),
           ),
           IconButton(
-              icon: Icon(
-                Icons.search,
-                color: primaryTextColor,
-              ),
-              onPressed: () {
-                provider.filter(controller.text);
-                FocusScope.of(context).unfocus();
-              }),
+            tooltip: "Search",
+            splashRadius: 1,
+            icon: Icon(
+              Icons.search,
+              color: primaryTextColor,
+            ),
+            onPressed: () =>
+                Repository.instance(context).filter(controller.value.text),
+          ),
         ],
       ),
     );
