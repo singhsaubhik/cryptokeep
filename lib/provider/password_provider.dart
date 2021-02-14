@@ -28,7 +28,7 @@ class PasswordProvider extends ChangeNotifier {
     for (var v in response) {
       _list.add(Password.fromMap(v));
     }
-    _initialList = _list;
+    _initialList = _list.toList();
     _isLoading = false;
     _isDBLoaded = true;
     notifyListeners();
@@ -65,7 +65,6 @@ class PasswordProvider extends ChangeNotifier {
         .where((element) =>
             element.name.toLowerCase().contains(text.toLowerCase()))
         .toList();
-
     notifyListeners();
   }
 }

@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PasswordProvider>(context);
+    /// TODO: Remove ADD button from here and give it to PasswordGrid
 
     return SafeArea(
       child: Scaffold(
@@ -39,12 +39,9 @@ class HomePage extends StatelessWidget {
           titleSpacing: 24,
           elevation: 0,
         ),
-        floatingActionButton: Visibility(
-          visible: provider.showAddButton,
-          child: FloatingActionButton(
-            onPressed: () => handleAddButton(context),
-            child: Icon(Icons.add),
-          ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => handleAddButton(context),
+          child: Icon(Icons.add),
         ),
         body: Column(
           children: [
