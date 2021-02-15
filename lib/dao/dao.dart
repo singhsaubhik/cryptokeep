@@ -57,11 +57,16 @@ class DBHelper {
   Future<List<Map<String, dynamic>>> find({search, projection}) async {
     var db = await instance.database;
     return await db
-        .query(passwordTable, where: "name LIKE ?", whereArgs: ["%$search%"]);
+        .query(passwordTable, where: "$_name LIKE ?", whereArgs: ["%$search%"]);
   }
 
   Future<int> insertOne(Map<String, dynamic> row) async {
     Database db = await instance.database;
     return await db.insert(passwordTable, row);
+  }
+
+  Future<int> deleteByID(String id) async{
+    var db = await instance.database;
+    return await db.delete(passwordTable, where: "$_id = ?", whereArgs: [id]);
   }
 }

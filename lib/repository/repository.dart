@@ -28,4 +28,12 @@ class Repository {
   void filter(String searchText) async {
     _provider.filter(searchText);
   }
+
+  void handleDeleteCard(Password object) async {
+    this._provider.setIsLoading(true);
+    var response = await DBHelper.instance.deleteByID(object.id);
+    print(response);
+    await Future.delayed(Duration(milliseconds: 350));
+    this._provider.removeItem(object, isLoading: false);
+  }
 }

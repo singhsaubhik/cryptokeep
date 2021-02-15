@@ -67,4 +67,13 @@ class PasswordProvider extends ChangeNotifier {
         .toList();
     notifyListeners();
   }
+
+  void removeItem(Password object, {isLoading}) {
+    _list.remove(object);
+    _initialList.remove(object);
+
+    if (isLoading != null) _isLoading = isLoading;
+
+    notifyListeners();
+  }
 }

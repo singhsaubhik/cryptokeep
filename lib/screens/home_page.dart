@@ -1,10 +1,8 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
 import 'package:cryptokeep/models/password_model.dart';
-import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:cryptokeep/repository/respository.dart';
+import 'package:cryptokeep/repository/repository.dart';
 
 class HomePage extends StatelessWidget {
   void handleAddButton(BuildContext context) async {
@@ -90,6 +88,7 @@ class AddPasswordDialog extends StatelessWidget {
             decoration: InputDecoration(
               hintText: "Enter Password",
             ),
+            obscureText: true,
           ),
           SizedBox(
             height: 25,

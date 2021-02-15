@@ -1,3 +1,4 @@
+import 'package:cryptokeep/components/bottom_sheet.dart';
 import 'package:cryptokeep/models/password_model.dart';
 import 'package:cryptokeep/provider/password_provider.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class PasswordGrid extends StatelessWidget {
               crossAxisCount: 2,
               children: <Widget>[
                 for (var data in provider.passwordList())
-                  PasswordCard(Key(data.id), data.name)
+                  PasswordCard(Key(data.id), data)
               ],
             ),
           );
@@ -40,67 +41,77 @@ class PasswordGrid extends StatelessWidget {
 }
 
 class PasswordCard extends StatelessWidget {
-  PasswordCard(Key key, this.name);
+  PasswordCard(Key key, this._password);
 
-  final String name;
+  final Password _password;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Container(
-            height: 50,
-            width: 50,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.all(
-                Radius.circular(100),
+    return GestureDetector(
+      onLongPress: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return BottomSheetLayout(_password);
+          },
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              width: 50,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(100),
+                ),
+                border: Border.all(
+                  width: 5,
+                  style: BorderStyle.solid,
+                  color: Color(0xFFD1D1D1),
+                ),
               ),
-              border: Border.all(
-                width: 5,
-                style: BorderStyle.solid,
-                color: Color(0xFFD1D1D1),
+              child: Text(
+                _password.name[0].toUpperCase(),
+                style: TextStyle(
+                  color: Color(0xFFD1D1D1),
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-            child: Text(
-              name[0],
+            SizedBox(
+              height: 15,
+            ),
+            Text(
+              _password.name,
               style: TextStyle(
-                color: Color(0xFFD1D1D1),
-                fontSize: 30,
-                fontWeight: FontWeight.w600,
-              ),
+                  color: Color(0xFFD7D7D7),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20),
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            name,
-            style: TextStyle(
-                color: Color(0xFFD7D7D7),
-                fontWeight: FontWeight.w600,
-                fontSize: 20),
-          ),
-          Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ButtonWidget(
-                "Edit",
-                borderColor: Colors.grey,
-              ),
-              ButtonWidget(
-                "Copy",
-                borderColor: Colors.blue[200],
-              ),
-            ],
-          )
-        ],
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ButtonWidget(
+                  "Edit",
+                  borderColor: Colors.grey,
+                ),
+                ButtonWidget(
+                  "Copy",
+                  borderColor: Colors.blue[200],
+                ),
+              ],
+            )
+          ],
+        ),
+        color: Color(0xFF5C5C5C).withOpacity(.5),
       ),
-      color: Color(0xFF5C5C5C).withOpacity(.5),
     );
   }
 }
