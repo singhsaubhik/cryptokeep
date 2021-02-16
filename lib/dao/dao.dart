@@ -65,7 +65,7 @@ class DBHelper {
     return await db.insert(passwordTable, row);
   }
 
-  Future<int> deleteByID(String id) async{
+  Future<int> deleteByID(String id) async {
     var db = await instance.database;
     return await db.delete(passwordTable, where: "$_id = ?", whereArgs: [id]);
   }
