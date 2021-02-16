@@ -1,4 +1,3 @@
-import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 
 final backgroundColor = Color(0xFF2C2D31);
