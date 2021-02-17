@@ -1,6 +1,6 @@
+import 'package:cryptokeep/components/dialogs.dart';
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
-import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptokeep/repository/repository.dart';
 
@@ -9,19 +9,13 @@ class HomePage extends StatelessWidget {
     var value = await showDialog(
         context: context,
         builder: (context) {
-          return AddPasswordDialog();
+          return CreateUpdateDialog();
         });
 
     print(value);
 
     if (value != null) {
-      Repository.instance(context).addPassword(
-        Password(
-          name: value["name"],
-          username: value["username"],
-          password: value["password"],
-        ),
-      );
+      Repository.instance(context).addPassword(value);
     }
   }
 
@@ -50,67 +44,6 @@ class HomePage extends StatelessWidget {
             PasswordGrid(),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AddPasswordDialog extends StatelessWidget {
-  final nameC = TextEditingController();
-  final userNameC = TextEditingController();
-  final passwordC = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(
-        "Add New Password",
-        style: TextStyle(color: Colors.white60),
-      ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: nameC,
-            decoration: InputDecoration(
-              hintText: "Enter Name",
-            ),
-          ),
-          TextField(
-            controller: userNameC,
-            decoration: InputDecoration(
-              hintText: "Enter user name",
-            ),
-          ),
-          TextField(
-            controller: passwordC,
-            decoration: InputDecoration(
-              hintText: "Enter Password",
-            ),
-            obscureText: true,
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RaisedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text("Cancel"),
-              ),
-              RaisedButton(
-                onPressed: () => Navigator.of(context).pop({
-                  "name": nameC.value.text,
-                  "username": userNameC.value.text,
-                  "password": passwordC.value.text
-                }),
-                child: Text("Save"),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }
