@@ -1,6 +1,7 @@
 import 'package:cryptokeep/components/dialogs.dart';
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
+import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 import 'package:cryptokeep/repository/repository.dart';
 
@@ -11,11 +12,8 @@ class HomePage extends StatelessWidget {
         builder: (context) {
           return CreateUpdateDialog();
         });
-
-    print(value);
-
     if (value != null) {
-      Repository.instance(context).addPassword(value);
+      Repository.instance(context).addPassword(Password.fromMap(value));
     }
   }
 

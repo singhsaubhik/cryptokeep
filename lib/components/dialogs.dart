@@ -1,75 +1,89 @@
 import 'package:flutter/material.dart';
 
 class CreateUpdateDialog extends StatelessWidget {
-  final nameC = TextEditingController();
-  final userNameC = TextEditingController();
-  final passwordC = TextEditingController();
+  final titleController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: Text(
-          "Add New Password",
-          style: TextStyle(color: Colors.white60),
-        ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _CreateUpdateDialogInput(
-              userNameC,
-              "Enter Title",
-              prefixIcon: Icons.text_fields,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _CreateUpdateDialogInput(
-              userNameC,
-              "Enter User Name",
-              prefixIcon: Icons.supervised_user_circle_outlined,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            _CreateUpdateDialogInput(
-              passwordC,
-              "Enter Password",
-              obscureText: true,
-              prefixIcon: Icons.lock,
-            ),
-            SizedBox(
-              height: 25,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      title: Text(
+        "Add New Password",
+        style: TextStyle(color: Colors.white60),
+      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
               children: [
-                RaisedButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text("Cancel"),
+                _CreateUpdateDialogInput(
+                  titleController,
+                  "Enter Title",
+                  prefixIcon: Icons.text_fields,
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
-                  onPressed: () => Navigator.of(context).pop({
-                    "name": nameC.value.text,
-                    "username": userNameC.value.text,
-                    "password": passwordC.value.text
-                  }),
-                  child: Text("Save"),
+                SizedBox(
+                  height: 10,
+                ),
+                _CreateUpdateDialogInput(
+                  usernameController,
+                  "Enter User Name",
+                  prefixIcon: Icons.supervised_user_circle_outlined,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                _CreateUpdateDialogInput(
+                  passwordController,
+                  "Enter Password",
+                  obscureText: true,
+                  prefixIcon: Icons.lock,
+                ),
+                SizedBox(
+                  height: 25,
                 ),
               ],
-            )
-          ],
-        ));
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RaisedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text("Cancel"),
+              ),
+              RaisedButton(
+                color: Theme.of(context).primaryColor,
+                textColor: Colors.white,
+                onPressed: () {
+                  var state = _formKey.currentState.validate();
+                  if (!state) return;
+                  Navigator.of(context).pop({
+                    "name": titleController.value.text,
+                    "username": usernameController.value.text,
+                    "password": passwordController.value.text
+                  });
+                },
+                child: Text("Save"),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
 
 class _CreateUpdateDialogInput extends StatelessWidget {
-  const _CreateUpdateDialogInput(this.controller, this.hintText,
+  const _CreateUpdateDialogInput(this._controller, this.hintText,
       {this.obscureText = false, this.prefixIcon});
 
-  final TextEditingController controller;
+  final TextEditingController _controller;
   final String hintText;
   final bool obscureText;
   final IconData prefixIcon;
@@ -82,14 +96,16 @@ class _CreateUpdateDialogInput extends StatelessWidget {
         disabledColor: Colors.green,
       ),
       child: TextFormField(
-        controller: controller,
+        controller: _controller,
         obscureText: this.obscureText,
         validator: (value) {
+          /// TODO: Add separate validator for each field
           if (value.isEmpty) {
             return "Please enter value";
           }
           return null;
         },
+        style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
           hintText: this.hintText,
           prefixIcon: Icon(prefixIcon),

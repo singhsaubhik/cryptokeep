@@ -13,23 +13,7 @@ class Repository {
 
   static Repository instance(BuildContext context) =>
       Repository._privateConstructor(context);
-
-  bool validatePasswordObject(object) {
-    var name = object["name"];
-    var username = object["username"];
-    String password = object["password"];
-
-    if (name == null || username == null || password == null) return false;
-
-    /// TODO: For password use regex
-    if (password.length < 6) return false;
-    return true;
-  }
-
-  void addPassword(object) async {
-    var isValid = validatePasswordObject(object);
-    if (!isValid) return;
-
+  void addPassword(Password object) async {
     this._provider.setIsLoading(true);
     var response = await DBHelper.instance.insertOne(object.toMap());
     if (response <= -1) {
