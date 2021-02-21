@@ -47,8 +47,7 @@ class PasswordCard extends StatelessWidget {
   final Password _password;
 
   void handleEditClick(BuildContext context) {
-    Repository.instance(context)
-        .handleCreateUpdate("update", this._password);
+    Repository.instance(context).handleCreateUpdate("update", this._password);
   }
 
   void handleCopyClick() {

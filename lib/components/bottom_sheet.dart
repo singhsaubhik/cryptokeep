@@ -16,9 +16,7 @@ class BottomSheetLayout extends StatelessWidget {
 
       case "Edit":
         Navigator.of(context).pop();
-        Repository
-            .instance(context)
-            .handleCreateUpdate("update", login);
+        Repository.instance(context).handleCreateUpdate("update", login);
         break;
       default:
         Navigator.of(context).pop();

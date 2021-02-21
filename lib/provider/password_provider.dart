@@ -82,9 +82,6 @@ class PasswordProvider extends ChangeNotifier {
     var existingLogin = _list.firstWhere((e) => e.id == id);
     existingLogin.update(object.toMap());
 
-    var existingLoginIList = _list.firstWhere((e) => e.id == id);
-    // existingLoginIList.update(object.toMap());
-
     if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
   }
