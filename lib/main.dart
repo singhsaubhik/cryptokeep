@@ -6,10 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: Color(0xFF2C2D31), // navigation bar color,
-    systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF2C2D31), // navigation bar color,
+      systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
+    ),
+  );
   runApp(MyApp());
 }
 

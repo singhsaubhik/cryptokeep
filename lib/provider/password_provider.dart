@@ -63,7 +63,7 @@ class PasswordProvider extends ChangeNotifier {
   void filter(String text) {
     _list = _initialList
         .where((element) =>
-            element.name.toLowerCase().contains(text.toLowerCase()))
+            element.title.toLowerCase().contains(text.toLowerCase()))
         .toList();
     notifyListeners();
   }
@@ -74,6 +74,18 @@ class PasswordProvider extends ChangeNotifier {
 
     if (isLoading != null) _isLoading = isLoading;
 
+    notifyListeners();
+  }
+
+  void updateItem(String id, Password object, {isLoading}) {
+    print(object.id);
+    var existingLogin = _list.firstWhere((e) => e.id == id);
+    existingLogin.update(object.toMap());
+
+    var existingLoginIList = _list.firstWhere((e) => e.id == id);
+    // existingLoginIList.update(object.toMap());
+
+    if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
   }
 }

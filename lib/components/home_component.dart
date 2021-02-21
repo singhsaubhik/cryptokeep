@@ -1,6 +1,7 @@
 import 'package:cryptokeep/components/bottom_sheet.dart';
 import 'package:cryptokeep/models/password_model.dart';
 import 'package:cryptokeep/provider/password_provider.dart';
+import 'package:cryptokeep/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -45,6 +46,16 @@ class PasswordCard extends StatelessWidget {
 
   final Password _password;
 
+  void handleEditClick(BuildContext context) {
+    Repository.instance(context)
+        .handleCreateUpdate("update", this._password);
+  }
+
+  void handleCopyClick() {
+    /// TODO: Implement
+    throw Exception();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -76,7 +87,7 @@ class PasswordCard extends StatelessWidget {
                 ),
               ),
               child: Text(
-                _password.name[0].toUpperCase(),
+                _password.title[0].toUpperCase(),
                 style: TextStyle(
                   color: Color(0xFFD1D1D1),
                   fontSize: 30,
@@ -88,7 +99,7 @@ class PasswordCard extends StatelessWidget {
               height: 15,
             ),
             Text(
-              _password.name,
+              _password.title,
               style: TextStyle(
                   color: Color(0xFFD7D7D7),
                   fontWeight: FontWeight.w600,
@@ -101,6 +112,7 @@ class PasswordCard extends StatelessWidget {
                 ButtonWidget(
                   "Edit",
                   borderColor: Colors.grey,
+                  onClick: () => handleEditClick(context),
                 ),
                 ButtonWidget(
                   "Copy",
@@ -125,25 +137,28 @@ class ButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      height: 30,
-      width: 65,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
+    return GestureDetector(
+      onTap: onClick,
+      child: Container(
+        alignment: Alignment.center,
+        height: 30,
+        width: 65,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
+          border: Border.all(
+            width: 1.5,
+            style: BorderStyle.solid,
+            color: this.borderColor,
+          ),
         ),
-        border: Border.all(
-          width: 1.5,
-          style: BorderStyle.solid,
-          color: this.borderColor,
-        ),
-      ),
-      child: Text(
-        this.text,
-        style: TextStyle(
-          color: Colors.white70,
+        child: Text(
+          this.text,
+          style: TextStyle(
+            color: Colors.white70,
+          ),
         ),
       ),
     );

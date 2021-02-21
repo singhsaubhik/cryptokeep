@@ -11,7 +11,7 @@ class DBHelper {
   static final passwordTable = "password_table";
 
   static final _id = "_id";
-  static final _name = "name";
+  static final _title = "title";
   static final _username = "username";
   static final _password = "password";
   static final _createdAt = "createdAt";
@@ -40,13 +40,19 @@ class DBHelper {
     await db.execute('''
       CREATE TABLE $passwordTable (
         $_id TEXT PRIMARY KEY,
-        $_name TEXT NOT NULL,
+        $_title TEXT NOT NULL,
         $_username TEXT,
         $_password TEXT NOT NULL,
         $_createdAt TEXT,
         $_updatedAt TEXT
       )
     ''');
+  }
+
+  /// Purge
+  Future deleteAll() async{
+    var db = await instance.database;
+    return db.delete(passwordTable);
   }
 
   Future<List<Map<String, dynamic>>> getAll() async {
@@ -57,7 +63,7 @@ class DBHelper {
   Future<List<Map<String, dynamic>>> find({search, projection}) async {
     var db = await instance.database;
     return await db
-        .query(passwordTable, where: "$_name LIKE ?", whereArgs: ["%$search%"]);
+        .query(passwordTable, where: "$_title LIKE ?", whereArgs: ["%$search%"]);
   }
 
   Future<int> insertOne(Map<String, dynamic> row) async {
@@ -68,5 +74,16 @@ class DBHelper {
   Future<int> deleteByID(String id) async {
     var db = await instance.database;
     return await db.delete(passwordTable, where: "$_id = ?", whereArgs: [id]);
+  }
+
+  Future<int> updateOne(String id, Map<String, dynamic> row) async {
+    print(row);
+    var db = await instance.database;
+    return await db.update(
+      passwordTable,
+      row,
+      where: "$_id = ?",
+      whereArgs: [id],
+    );
   }
 }

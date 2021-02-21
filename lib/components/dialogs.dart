@@ -1,9 +1,21 @@
+import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 
 class CreateUpdateDialog extends StatelessWidget {
   final titleController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final Password login;
+
+  CreateUpdateDialog({this.login}) {
+    if (this.login != null) {
+      titleController.value = titleController.value.copyWith(text: login.title);
+      usernameController.value =
+          usernameController.value.copyWith(text: login.username);
+      passwordController.value =
+          passwordController.value.copyWith(text: login.password);
+    }
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -64,7 +76,7 @@ class CreateUpdateDialog extends StatelessWidget {
                   var state = _formKey.currentState.validate();
                   if (!state) return;
                   Navigator.of(context).pop({
-                    "name": titleController.value.text,
+                    "title": titleController.value.text,
                     "username": usernameController.value.text,
                     "password": passwordController.value.text
                   });

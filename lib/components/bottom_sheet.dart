@@ -7,6 +7,24 @@ class BottomSheetLayout extends StatelessWidget {
 
   final Password _password;
 
+  void _handleItemClick(BuildContext context, String type, Password login) {
+    switch (type) {
+      case "Delete":
+        Navigator.of(context).pop();
+        Repository.instance(context).handleDeleteCard(login);
+        break;
+
+      case "Edit":
+        Navigator.of(context).pop();
+        Repository
+            .instance(context)
+            .handleCreateUpdate("update", login);
+        break;
+      default:
+        Navigator.of(context).pop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,18 +44,9 @@ class BottomSheetLayout extends StatelessWidget {
   }
 
   GestureDetector buildItem(
-      BuildContext context, IconData icon, String text, Password password) {
+      BuildContext context, IconData icon, String text, Password login) {
     return GestureDetector(
-      onTap: () {
-        switch (text) {
-          case "Delete":
-            Navigator.of(context).pop();
-            Repository.instance(context).handleDeleteCard(password);
-            break;
-          default:
-            Navigator.of(context).pop();
-        }
-      },
+      onTap: () => _handleItemClick(context, text, login),
       child: Row(
         children: [
           Icon(
