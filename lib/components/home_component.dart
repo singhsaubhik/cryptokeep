@@ -13,13 +13,13 @@ class PasswordGrid extends StatelessWidget {
     final provider = Provider.of<PasswordProvider>(context);
     final _controller = ScrollController();
 
-    _controller.addListener(() {
-      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        provider.setShowAddButton(false);
-      } else {
-        provider.setShowAddButton(true);
-      }
-    });
+    // _controller.addListener(() {
+    //   if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+    //     provider.setShowAddButton(false);
+    //   } else {
+    //     provider.setShowAddButton(true);
+    //   }
+    // });
 
     return provider.isLoading
         ? Center(
