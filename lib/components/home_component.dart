@@ -52,7 +52,8 @@ class PasswordCard extends StatelessWidget {
 
   void handleCopyClick() {
     /// TODO: Implement
-    throw Exception();
+    // throw UnimplementedError();
+    print("Copy is clicked");
   }
 
   @override
@@ -123,6 +124,7 @@ class PasswordCard extends StatelessWidget {
                 ButtonWidget(
                   "Copy",
                   borderColor: Colors.blue[200],
+                  onClick: () => handleCopyClick(),
                 ),
               ],
             )

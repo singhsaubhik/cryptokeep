@@ -1,17 +1,8 @@
+import 'package:cryptokeep/components/app_snackbar.dart';
 import 'package:cryptokeep/models/password_model.dart';
 import 'package:flutter/material.dart';
 
-class LoginDetails extends StatefulWidget {
-  @override
-  _LoginDetailsState createState() => _LoginDetailsState();
-}
-
-class _LoginDetailsState extends State<LoginDetails> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class LoginDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Password _login = ModalRoute.of(context).settings.arguments;
@@ -21,7 +12,9 @@ class _LoginDetailsState extends State<LoginDetails> {
           backgroundColor: Color(0xFF538CFF),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            AppSnackBar.getInstance.showAppSnackBar("Not yet implemented");
+          },
           child: Icon(Icons.edit),
         ),
         body: Column(
@@ -30,41 +23,108 @@ class _LoginDetailsState extends State<LoginDetails> {
             SizedBox(height: 5),
             TopSecondPanel(),
             SizedBox(height: 20),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
+            _LoginDetailsPanel(_login)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LoginDetailsPanel extends StatefulWidget {
+  const _LoginDetailsPanel(this._login);
+
+  final Password _login;
+
+  @override
+  __LoginDetailsPanelState createState() => __LoginDetailsPanelState();
+}
+
+class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
+  bool showPassword = false;
+
+  @override
+  Widget build(BuildContext context) {
+    /// TODO: Remove this line with better way.
+    /// This registers the snackbar with scaffold for global use
+    final _ = AppSnackBar.init(context);
+
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          TextFormField(
+            readOnly: true,
+            initialValue: widget._login.username,
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.verified_user,
+                color: Colors.blue,
+              ),
+              suffix: Icon(
+                Icons.copy,
+                color: Colors.white.withOpacity(.8),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white.withOpacity(.7),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          TextFormField(
+            obscureText: !this.showPassword,
+            readOnly: true,
+            initialValue: widget._login.password,
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.blue,
+              ),
+              suffix: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextFormField(
-                    readOnly: true,
-                    initialValue: _login.username,
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(.7),
-                        ),
-                      ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    child: Icon(
+                      showPassword ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.white.withOpacity(.8),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    obscureText: true,
-                    readOnly: true,
-                    initialValue: _login.password,
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white.withOpacity(.7),
-                        ),
-                      ),
-                    ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Icon(
+                    Icons.copy,
+                    color: Colors.white.withOpacity(.8),
                   ),
                 ],
               ),
-            )
-          ],
-        ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white.withOpacity(.7),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white.withOpacity(.7),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.white.withOpacity(.7),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -97,10 +157,10 @@ class BuildTopTitle extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          Text(
-            _login.createdAt,
-            style: TextStyle(color: Color(0xFFD7D7D7), fontSize: 16),
-          ),
+          // Text(
+          //   _login.createdAt,
+          //   style: TextStyle(color: Color(0xFFD7D7D7), fontSize: 16),
+          // ),
         ],
       ),
     );
@@ -121,9 +181,33 @@ class TopSecondPanel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          BuildIconWithText("Category", Icons.calendar_today),
-          BuildIconWithText("Password Score", Icons.account_balance),
-          BuildIconWithText("Favorite", Icons.favorite),
+          BuildIconWithText(
+            "Category",
+            Icon(
+              Icons.account_tree_sharp,
+              color: Colors.blue,
+              size: 30,
+            ),
+          ),
+          BuildIconWithText(
+            "Password Score",
+            Text(
+              "100 %",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          BuildIconWithText(
+            "Favorite",
+            Icon(
+              Icons.favorite,
+              color: Colors.blue,
+              size: 30,
+            ),
+          ),
         ],
       ),
     );
@@ -132,13 +216,14 @@ class TopSecondPanel extends StatelessWidget {
 
 class BuildIconWithText extends StatelessWidget {
   final String title;
-  final IconData icon;
+  final Widget child;
 
-  const BuildIconWithText(this.title, this.icon);
+  const BuildIconWithText(this.title, this.child);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           title,
@@ -149,11 +234,7 @@ class BuildIconWithText extends StatelessWidget {
         SizedBox(
           height: 5,
         ),
-        Icon(
-          icon,
-          color: Colors.blue,
-          size: 35,
-        )
+        child
       ],
     );
   }
