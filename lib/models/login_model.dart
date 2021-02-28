@@ -43,7 +43,6 @@ class Password {
   }
 
   void update(Map<String, dynamic> value) {
-    /// TODO: Remove or operation ///
     this.title = value["title"];
     this.username = value["username"];
     this.password = value["password"];
