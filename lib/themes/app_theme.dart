@@ -19,4 +19,15 @@ class AppTheme {
     backgroundColor: bgColor,
     elevation: 0,
   );
+
+  static InputDecoration textFieldDecoration = InputDecoration(
+    border: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.blueAccent),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.blueGrey,
+      ),
+    ),
+  );
 }

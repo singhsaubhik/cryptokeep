@@ -1,7 +1,6 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
 import 'package:flutter/material.dart';
-import 'package:cryptokeep/repository/repository.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -17,8 +16,10 @@ class HomePage extends StatelessWidget {
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () =>
-              Repository.instance(context).handleCreateUpdate("create", null),
+          onPressed: () {
+            // Repository.instance(context).handleCreateUpdate("create", null);
+            Navigator.of(context).pushNamed("/create");
+          },
           child: Icon(Icons.add),
         ),
         body: Column(

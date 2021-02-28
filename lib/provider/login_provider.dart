@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:cryptokeep/dao/dao.dart';
-import 'package:cryptokeep/models/password_model.dart';
+import 'package:cryptokeep/models/login_model.dart';
 import 'package:flutter/foundation.dart';
 
 class PasswordProvider extends ChangeNotifier {
@@ -18,7 +18,7 @@ class PasswordProvider extends ChangeNotifier {
   ///
 
   bool _isDBLoaded = false;
-  List<Password> _list = [], _initialList = [];
+  List<Login> _list = [], _initialList = [];
   bool _isLoading = false;
 
   void _loadFromDB() async {
@@ -26,7 +26,7 @@ class PasswordProvider extends ChangeNotifier {
     var response = await DBHelper.instance.getAll();
 
     for (var v in response) {
-      _list.add(Password.fromMap(v));
+      _list.add(Login.fromMap(v));
     }
     _initialList = _list.toList();
     _isLoading = false;
@@ -34,7 +34,7 @@ class PasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UnmodifiableListView<Password> passwordList() {
+  UnmodifiableListView<Login> passwordList() {
     if (!_isDBLoaded) _loadFromDB();
     return UnmodifiableListView(_list);
   }
@@ -47,14 +47,14 @@ class PasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void add(Password password, {isLoading}) {
+  void add(Login password, {isLoading}) {
     _list.add(password);
     _initialList.add(password);
     if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
   }
 
-  void updateList(List<Password> list, {isLoading}) {
+  void updateList(List<Login> list, {isLoading}) {
     _list = list;
     if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
@@ -68,7 +68,7 @@ class PasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(Password object, {isLoading}) {
+  void removeItem(Login object, {isLoading}) {
     _list.remove(object);
     _initialList.remove(object);
 
@@ -77,7 +77,7 @@ class PasswordProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateItem(String id, Password object, {isLoading}) {
+  void updateItem(String id, Login object, {isLoading}) {
     print(object.id);
     var existingLogin = _list.firstWhere((e) => e.id == id);
     existingLogin.update(object.toMap());

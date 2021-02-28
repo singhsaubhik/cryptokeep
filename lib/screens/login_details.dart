@@ -1,15 +1,15 @@
 import 'package:cryptokeep/components/app_snackbar.dart';
-import 'package:cryptokeep/models/password_model.dart';
+import 'package:cryptokeep/models/login_model.dart';
 import 'package:flutter/material.dart';
 
 class LoginDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Password _login = ModalRoute.of(context).settings.arguments;
+    final Login _login = ModalRoute.of(context).settings.arguments;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF538CFF),
+          backgroundColor: Color(0xFF797979).withOpacity(.2),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -34,7 +34,7 @@ class LoginDetails extends StatelessWidget {
 class _LoginDetailsPanel extends StatefulWidget {
   const _LoginDetailsPanel(this._login);
 
-  final Password _login;
+  final Login _login;
 
   @override
   __LoginDetailsPanelState createState() => __LoginDetailsPanelState();
@@ -131,7 +131,7 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
 }
 
 class BuildTopTitle extends StatelessWidget {
-  final Password _login;
+  final Login _login;
 
   BuildTopTitle(this._login);
 
@@ -139,7 +139,7 @@ class BuildTopTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
-      color: Color(0xFF538CFF),
+      color: Color(0xFF797979).withOpacity(.2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
