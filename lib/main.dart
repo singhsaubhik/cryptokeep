@@ -1,4 +1,4 @@
-import 'package:cryptokeep/provider/password_provider.dart';
+import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:cryptokeep/routes.dart';
 import 'package:cryptokeep/themes/app_theme.dart';
 import 'package:flutter/material.dart';
