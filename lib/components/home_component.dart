@@ -1,12 +1,11 @@
 import 'package:cryptokeep/components/bottom_sheet.dart';
-import 'package:cryptokeep/models/password_model.dart';
-import 'package:cryptokeep/provider/password_provider.dart';
-import 'package:cryptokeep/repository/repository.dart';
+import 'package:cryptokeep/models/login_model.dart';
+import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PasswordGrid extends StatelessWidget {
-  final List<Password> passwordList = [];
+  final List<Login> passwordList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +41,13 @@ class PasswordGrid extends StatelessWidget {
 }
 
 class PasswordCard extends StatelessWidget {
-  PasswordCard(Key key, this._password);
+  PasswordCard(Key key, this._login);
 
-  final Password _password;
+  final Login _login;
 
   void handleEditClick(BuildContext context) {
-    Repository.instance(context).handleCreateUpdate("update", this._password);
+    // Repository.instance(context).handleCreateUpdate("update", this._password);
+    Navigator.pushNamed(context, "/update", arguments: this._login);
   }
 
   void handleCopyClick() {
@@ -63,14 +63,14 @@ class PasswordCard extends StatelessWidget {
         Navigator.pushNamed(
           context,
           "/login_details",
-          arguments: this._password,
+          arguments: this._login,
         );
       },
       onLongPress: () {
         showModalBottomSheet(
           context: context,
           builder: (context) {
-            return BottomSheetLayout(_password);
+            return BottomSheetLayout(_login);
           },
         );
       },
@@ -94,7 +94,7 @@ class PasswordCard extends StatelessWidget {
                 ),
               ),
               child: Text(
-                _password.title[0].toUpperCase(),
+                _login.title[0].toUpperCase(),
                 style: TextStyle(
                   color: Color(0xFFD1D1D1),
                   fontSize: 30,
@@ -106,7 +106,7 @@ class PasswordCard extends StatelessWidget {
               height: 15,
             ),
             Text(
-              _password.title,
+              _login.title,
               style: TextStyle(
                   color: Color(0xFFD7D7D7),
                   fontWeight: FontWeight.w600,

@@ -8,12 +8,13 @@ class DBHelper {
   static final _databaseName = "cryptokeep.db";
   static final _databaseVersion = 1;
 
-  static final passwordTable = "password_table";
+  static final loginTable = "password_table";
 
   static final _id = "_id";
   static final _title = "title";
   static final _username = "username";
   static final _password = "password";
+  static final _category = "category";
   static final _createdAt = "createdAt";
   static final _updatedAt = "updatedAt";
 
@@ -38,11 +39,12 @@ class DBHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE $passwordTable (
+      CREATE TABLE $loginTable (
         $_id TEXT PRIMARY KEY,
         $_title TEXT NOT NULL,
-        $_username TEXT,
+        $_username TEXT NOT NULL,
         $_password TEXT NOT NULL,
+        $_category TEXT,
         $_createdAt TEXT,
         $_updatedAt TEXT
       )
@@ -52,35 +54,35 @@ class DBHelper {
   /// Purge
   Future deleteAll() async {
     var db = await instance.database;
-    return db.delete(passwordTable);
+    return db.delete(loginTable);
   }
 
   Future<List<Map<String, dynamic>>> getAll() async {
     var db = await instance.database;
-    return await db.query(passwordTable);
+    return await db.query(loginTable);
   }
 
   Future<List<Map<String, dynamic>>> find({search, projection}) async {
     var db = await instance.database;
-    return await db.query(passwordTable,
-        where: "$_title LIKE ?", whereArgs: ["%$search%"]);
+    return await db
+        .query(loginTable, where: "$_title LIKE ?", whereArgs: ["%$search%"]);
   }
 
   Future<int> insertOne(Map<String, dynamic> row) async {
     Database db = await instance.database;
-    return await db.insert(passwordTable, row);
+    return await db.insert(loginTable, row);
   }
 
   Future<int> deleteByID(String id) async {
     var db = await instance.database;
-    return await db.delete(passwordTable, where: "$_id = ?", whereArgs: [id]);
+    return await db.delete(loginTable, where: "$_id = ?", whereArgs: [id]);
   }
 
   Future<int> updateOne(String id, Map<String, dynamic> row) async {
     print(row);
     var db = await instance.database;
     return await db.update(
-      passwordTable,
+      loginTable,
       row,
       where: "$_id = ?",
       whereArgs: [id],
