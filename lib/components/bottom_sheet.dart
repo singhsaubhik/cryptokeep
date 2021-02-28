@@ -1,13 +1,13 @@
-import 'package:cryptokeep/models/password_model.dart';
+import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/repository/repository.dart';
 import 'package:flutter/material.dart';
 
 class BottomSheetLayout extends StatelessWidget {
   BottomSheetLayout(this._password);
 
-  final Password _password;
+  final Login _password;
 
-  void _handleItemClick(BuildContext context, String type, Password login) {
+  void _handleItemClick(BuildContext context, String type, Login login) {
     switch (type) {
       case "Delete":
         Navigator.of(context).pop();
@@ -16,7 +16,7 @@ class BottomSheetLayout extends StatelessWidget {
 
       case "Edit":
         Navigator.of(context).pop();
-        Repository.instance(context).handleCreateUpdate("update", login);
+        Navigator.pushNamed(context, "/update", arguments: this._password);
         break;
       default:
         Navigator.of(context).pop();
@@ -42,7 +42,7 @@ class BottomSheetLayout extends StatelessWidget {
   }
 
   GestureDetector buildItem(
-      BuildContext context, IconData icon, String text, Password login) {
+      BuildContext context, IconData icon, String text, Login login) {
     return GestureDetector(
       onTap: () => _handleItemClick(context, text, login),
       child: Row(
