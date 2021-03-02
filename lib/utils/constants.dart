@@ -1,10 +1,43 @@
 import 'package:flutter/material.dart';
 
-final backgroundColor = Color(0xFF2C2D31);
-final primaryColor = Colors.blue;
+const kPrimaryColor = Color(0xFF0A0E21);
+const kScaffoldBackgroundColor = Color(0xFF0A0E21);
+const kActiveCardColour = Color(0xFF1D1E33);
+// const kInactiveCardColour = Color(0xFF111328);
+const kInactiveCardColour = Color(0xFF1D1E33);
+const kAccentColor = Color(0xFF6dd5ed);
 
-// ignore: slash_for_doc_comments
+const kLabelTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Color(0xFF8D8E98),
+);
 
-//Text Colors
-final primaryTextColor = Colors.white;
-final secondaryColor = Colors.white70;
+const kNumberTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+);
+
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kTitleTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kResultTextStyle = TextStyle(
+  color: Color(0xFF24D876),
+  fontSize: 22.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kBMITextStyle = TextStyle(
+  fontSize: 100.0,
+  fontWeight: FontWeight.bold,
+);
+
+const kBodyTextStyle = TextStyle(
+  fontSize: 22.0,
+);

@@ -1,5 +1,6 @@
 import 'package:cryptokeep/components/app_snackbar.dart';
 import 'package:cryptokeep/models/login_model.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class LoginDetails extends StatelessWidget {
@@ -9,7 +10,7 @@ class LoginDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF797979).withOpacity(.2),
+          backgroundColor: kInactiveCardColour,
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -60,13 +61,11 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.verified_user,
-                color: Colors.blue,
               ),
               suffix: Icon(
                 Icons.copy,
-                color: Colors.white.withOpacity(.8),
               ),
-              enabledBorder: OutlineInputBorder(
+              border: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.white.withOpacity(.7),
                 ),
@@ -82,7 +81,6 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.lock,
-                color: Colors.blue,
               ),
               suffix: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -95,7 +93,6 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
                     },
                     child: Icon(
                       showPassword ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.white.withOpacity(.8),
                     ),
                   ),
                   SizedBox(
@@ -103,21 +100,10 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
                   ),
                   Icon(
                     Icons.copy,
-                    color: Colors.white.withOpacity(.8),
                   ),
                 ],
               ),
               border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(.7),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(.7),
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.white.withOpacity(.7),
                 ),
@@ -139,7 +125,7 @@ class BuildTopTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
-      color: Color(0xFF797979).withOpacity(.2),
+      color: kInactiveCardColour,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -185,7 +171,7 @@ class TopSecondPanel extends StatelessWidget {
             "Category",
             Icon(
               Icons.account_tree_sharp,
-              color: Colors.blue,
+              color: Theme.of(context).accentColor,
               size: 30,
             ),
           ),
@@ -196,7 +182,6 @@ class TopSecondPanel extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
-                color: Colors.white,
               ),
             ),
           ),
@@ -204,7 +189,7 @@ class TopSecondPanel extends StatelessWidget {
             "Favorite",
             Icon(
               Icons.favorite,
-              color: Colors.blue,
+              color: Theme.of(context).accentColor,
               size: 30,
             ),
           ),
