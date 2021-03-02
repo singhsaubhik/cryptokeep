@@ -1,6 +1,5 @@
 import 'package:cryptokeep/auth/auth.dart';
 import 'package:cryptokeep/utils/common.dart';
-import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 void handleFingerPress(Function onFingerPrint) {
@@ -87,7 +86,6 @@ class PasswordInput extends StatelessWidget {
           onTap: () => handleFingerPress(_onFingerPrint),
           child: Icon(
             Icons.fingerprint_rounded,
-            color: primaryColor,
             size: 40,
           ),
         )

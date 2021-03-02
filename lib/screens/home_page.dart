@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
           primary: false,
           title: Text("Home"),
           titleSpacing: 24,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(
