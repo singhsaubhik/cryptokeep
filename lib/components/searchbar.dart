@@ -12,7 +12,7 @@ class SearchBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width * .9,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-          color: Colors.grey[800],
+          color: kInactiveCardColour,
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Row(
         children: [
@@ -25,7 +25,6 @@ class SearchBar extends StatelessWidget {
                 hintText: "Search Password",
                 suffixIcon: IconButton(
                   splashRadius: 1,
-                  color: secondaryColor,
                   onPressed: () {
                     Repository.instance(context).filter("");
                     controller.clear();

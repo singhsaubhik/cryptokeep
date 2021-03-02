@@ -1,6 +1,7 @@
 import 'package:cryptokeep/components/bottom_sheet.dart';
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/provider/login_provider.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -130,7 +131,7 @@ class PasswordCard extends StatelessWidget {
             )
           ],
         ),
-        color: Color(0xFF5C5C5C).withOpacity(.5),
+        color: kInactiveCardColour,
       ),
     );
   }
