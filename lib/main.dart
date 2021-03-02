@@ -1,6 +1,7 @@
 import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:cryptokeep/routes.dart';
 import 'package:cryptokeep/themes/app_theme.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,8 @@ import 'package:provider/provider.dart';
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      systemNavigationBarColor: Color(0xFF2C2D31), // navigation bar color,
+      systemNavigationBarColor:
+          kScaffoldBackgroundColor, // navigation bar color,
       systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
     ),
   );

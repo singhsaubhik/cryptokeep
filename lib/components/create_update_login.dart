@@ -99,10 +99,12 @@ class _CreateUpdateActions extends StatelessWidget {
       children: [
         Expanded(
           child: MaterialButton(
-            color: Theme.of(context).primaryColor,
-            textColor: Colors.white,
+            color: Theme.of(context).accentColor,
             onPressed: onSubmit,
-            child: Text("Save"),
+            child: Text(
+              "Save",
+              style: TextStyle(color: Colors.black),
+            ),
           ),
         ),
       ],
