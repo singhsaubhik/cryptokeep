@@ -8,15 +8,15 @@ class DBHelper {
   static final _databaseName = "cryptokeep.db";
   static final _databaseVersion = 1;
 
-  static final loginTable = "password_table";
+  static const loginTable = "password_table";
 
-  static final _id = "_id";
-  static final _title = "title";
-  static final _username = "username";
-  static final _password = "password";
-  static final _category = "category";
-  static final _createdAt = "createdAt";
-  static final _updatedAt = "updatedAt";
+  static const _id = "_id";
+  static const _title = "title";
+  static const _username = "username";
+  static const _password = "password";
+  static const _category = "category";
+  static const _createdAt = "createdAt";
+  static const _updatedAt = "updatedAt";
 
   DBHelper._privateConstructor();
 
@@ -68,9 +68,12 @@ class DBHelper {
         .query(loginTable, where: "$_title LIKE ?", whereArgs: ["%$search%"]);
   }
 
-  Future<int> insertOne(Map<String, dynamic> row) async {
+  Future<int> insertOne(
+    Map<String, dynamic> row, {
+    table = DBHelper.loginTable,
+  }) async {
     Database db = await instance.database;
-    return await db.insert(loginTable, row);
+    return await db.insert(table, row);
   }
 
   Future<int> deleteByID(String id) async {
@@ -79,7 +82,6 @@ class DBHelper {
   }
 
   Future<int> updateOne(String id, Map<String, dynamic> row) async {
-    print(row);
     var db = await instance.database;
     return await db.update(
       loginTable,
