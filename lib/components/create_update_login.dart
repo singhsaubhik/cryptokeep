@@ -103,7 +103,6 @@ class _CreateUpdateActions extends StatelessWidget {
             onPressed: onSubmit,
             child: Text(
               "Save",
-              style: TextStyle(color: Colors.black),
             ),
           ),
         ),
