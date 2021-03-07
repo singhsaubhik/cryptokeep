@@ -60,7 +60,7 @@ class PasswordInput extends StatelessWidget {
                 suffixIcon: GestureDetector(
                   onTap: () {
                     if (_key.currentState.validate())
-                      _onSubmit(AuthType.password);
+                      _onSubmit(context, AuthType.password);
                   },
                   child: Icon(
                     Icons.lock_open_outlined,

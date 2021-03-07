@@ -64,7 +64,7 @@ class PasswordCard extends StatelessWidget {
         Navigator.pushNamed(
           context,
           "/login_details",
-          arguments: this._login,
+          arguments: this._login.id,
         );
       },
       onLongPress: () {
