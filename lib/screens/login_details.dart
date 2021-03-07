@@ -1,12 +1,15 @@
-import 'package:cryptokeep/components/app_snackbar.dart';
 import 'package:cryptokeep/models/login_model.dart';
+import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Login _login = ModalRoute.of(context).settings.arguments;
+    final provider = Provider.of<PasswordProvider>(context);
+    final String id = ModalRoute.of(context).settings.arguments;
+    final Login _login = provider.getItemById(id);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -14,7 +17,7 @@ class LoginDetails extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            AppSnackBar.getInstance.showAppSnackBar("Not yet implemented");
+            Navigator.pushNamed(context, "/update", arguments: _login);
           },
           child: Icon(Icons.edit),
         ),
@@ -46,17 +49,13 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
 
   @override
   Widget build(BuildContext context) {
-    /// TODO: Remove this line with better way.
-    /// This registers the snackbar with scaffold for global use
-    final _ = AppSnackBar.init(context);
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
           TextFormField(
             readOnly: true,
-            initialValue: widget._login.username,
+            controller: TextEditingController(text: widget._login.username),
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(
@@ -76,7 +75,7 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
           TextFormField(
             obscureText: !this.showPassword,
             readOnly: true,
-            initialValue: widget._login.password,
+            controller: TextEditingController(text: widget._login.password),
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(

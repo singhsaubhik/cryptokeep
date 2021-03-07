@@ -1,5 +1,6 @@
 import 'package:cryptokeep/auth/auth.dart';
 import 'package:cryptokeep/components/splash_component.dart';
+import 'package:cryptokeep/repository/user_repository.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
 
@@ -33,16 +34,13 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  void handleSubmit(AuthType authType) {
+  void handleSubmit(BuildContext context, AuthType authType) {
     String password = _controller.value.text;
-    var isAuthenticated =
-        authType == AuthType.password ? handlePasswordAuth(password) : true;
-
-    if (isAuthenticated) Navigator.of(context).pushReplacementNamed("/home");
+    if (authType == AuthType.password) handlePasswordAuth(context, password);
   }
 
-  bool handlePasswordAuth(String password) {
-    return password == "1234";
+  void handlePasswordAuth(BuildContext context, String password) {
+    UserRepository.signIn(context, password);
   }
 
   @override

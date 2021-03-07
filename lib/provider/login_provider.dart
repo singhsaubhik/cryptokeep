@@ -85,4 +85,9 @@ class PasswordProvider extends ChangeNotifier {
     if (isLoading != null) _isLoading = isLoading;
     notifyListeners();
   }
+
+  Login getItemById(String id) {
+    final _login = _list.singleWhere((element) => element.id == id);
+    return _login;
+  }
 }
