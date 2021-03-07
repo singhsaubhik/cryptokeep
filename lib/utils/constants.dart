@@ -7,6 +7,11 @@ const kActiveCardColour = Color(0xFF1D1E33);
 const kInactiveCardColour = Color(0xFF1D1E33);
 const kAccentColor = Color(0xFF6dd5ed);
 
+const IS_FIRST_RUN = "isFirstRun";
+const APP_CONFIGS = "cryptokeep_configs";
+const USER_BOX = "cryptokeep_user_box";
+const IS_USER = "IS_USER";
+
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,
   color: Color(0xFF8D8E98),
