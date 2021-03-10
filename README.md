@@ -50,24 +50,23 @@ This is password manager for all your password needs, this stores your password 
 
 
 ## Screenshots
-<p align="center">
-<img src="assets/screenshots/screen1.jpg" alt="screen1">
+<img src="assets/screenshots/screen1.jpg" alt="screen1" width="768" height="1368">
 <br />
 <br />
-<img src="assets/screenshots/screen2.jpg" alt="screen2">
+<img src="assets/screenshots/screen2.jpg" alt="screen2" width="768" height="1368">
 <br />
 <br />
-<img src="assets/screenshots/screen3.jpg" alt="screen3">
+<img src="assets/screenshots/screen3.jpg" alt="screen3" width="768" height="1368">
 <br />
 <br />
-<img src="assets/screenshots/screen4.jpg" alt="screen4">
+<img src="assets/screenshots/screen4.jpg" alt="screen4" width="768" height="1368">
 <br />
 <br />
-<img src="assets/screenshots/screen5.jpg" alt="screen5">
+<img src="assets/screenshots/screen5.jpg" alt="screen5" width="768" height="1368">
 <br />
 <br />
-<img src="assets/screenshots/screen6.jpg" alt="screen6">
-</p>
+<img src="assets/screenshots/screen6.jpg" alt="screen6" width="768" height="1368">
+
 
 <br />
 
