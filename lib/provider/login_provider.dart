@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/login_model.dart';
+import 'package:cryptokeep/utils/encryption.dart';
 import 'package:flutter/foundation.dart';
 
 class PasswordProvider extends ChangeNotifier {
@@ -31,16 +32,10 @@ class PasswordProvider extends ChangeNotifier {
     // Decrypt the password in _list
     for (var index = 0; index < _list.length; index++) {
       _list[index].password =
-          DBHelper.encrypter.decrypt64(_list[index].password, iv: DBHelper.iv);
+          encrypter.decrypt64(_list[index].password, iv: iv);
     }
 
     _initialList = _list.toList();
-
-    // Decrypt the password in _initialList
-    // for (var index = 0; index < _initialList.length; index++) {
-    //   _initialList[index].password =
-    //       DBHelper.encrypter.decrypt64(_initialList[index].password, , iv: DBHelper.iv);
-    // }
 
     _isLoading = false;
     _isDBLoaded = true;

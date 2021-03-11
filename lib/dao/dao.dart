@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:cryptokeep/utils/encryption.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:encrypt/encrypt.dart';
 
 class DBHelper {
   static final _databaseName = "cryptokeep.db";
@@ -18,14 +18,6 @@ class DBHelper {
   static const _category = "category";
   static const _createdAt = "createdAt";
   static const _updatedAt = "updatedAt";
-
-  // Create a key for encryption
-  static final key = Key.fromUtf8('my 32 length key................');
-  // IV
-  static final iv = IV.fromLength(16);
-  // Create encrypter
-  static final encrypter =
-      Encrypter(AES(Key.fromUtf8('my 32 length key................')));
 
   DBHelper._privateConstructor();
 
@@ -101,17 +93,4 @@ class DBHelper {
       whereArgs: [id],
     );
   }
-
-  // Encrypt password in the row
-  Map<String, dynamic> encryptRow(Map<String, dynamic> row) {
-    row["password"] = encrypter.encrypt(row["password"], iv: iv).base64;
-    print("Encrypted password: " + row["password"]);
-    return row;
-  }
-
-  // Decrypt password in the row
-  // static Map<String, dynamic> decryptRow(Map<String, dynamic> row) {
-  //   row["password"] = encrypter.decrypt(row["password"], iv: iv);
-  //   return row;
-  // }
 }
