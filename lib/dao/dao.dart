@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:encrypt/encrypt.dart';
 
 class DBHelper {
   static final _databaseName = "cryptokeep.db";
@@ -17,6 +18,13 @@ class DBHelper {
   static const _category = "category";
   static const _createdAt = "createdAt";
   static const _updatedAt = "updatedAt";
+
+  // Create a key for encryption
+  static final key = Key.fromUtf8(loginTable);
+  // IV
+  static final iv = IV.fromLength(16);
+  // Create encrypter
+  static final encrypter = Encrypter(AES(Key.fromUtf8(loginTable)));
 
   DBHelper._privateConstructor();
 
@@ -73,6 +81,7 @@ class DBHelper {
     table = DBHelper.loginTable,
   }) async {
     Database db = await instance.database;
+    row = encryptRow(row);
     return await db.insert(table, row);
   }
 
@@ -83,11 +92,24 @@ class DBHelper {
 
   Future<int> updateOne(String id, Map<String, dynamic> row) async {
     var db = await instance.database;
+    row = encryptRow(row);
     return await db.update(
       loginTable,
       row,
       where: "$_id = ?",
       whereArgs: [id],
     );
+  }
+
+  // Encrypt password
+  Map<String, dynamic> encryptRow(Map<String, dynamic> row) {
+    row["password"] = encrypter.encrypt(row["password"], iv: iv);
+    return row;
+  }
+
+  // Decrypt password
+  Map<String, dynamic> decryptRow(Map<String, dynamic> row) {
+    row["password"] = encrypter.decrypt(row["password"], iv: iv);
+    return row;
   }
 }
