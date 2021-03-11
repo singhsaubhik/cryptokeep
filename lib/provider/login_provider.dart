@@ -28,7 +28,20 @@ class PasswordProvider extends ChangeNotifier {
     for (var v in response) {
       _list.add(Login.fromMap(v));
     }
+    // Decrypt the password in _list
+    for (var index = 0; index < _list.length; index++) {
+      _list[index].password =
+          DBHelper.encrypter.decrypt64(_list[index].password, iv: DBHelper.iv);
+    }
+
     _initialList = _list.toList();
+
+    // Decrypt the password in _initialList
+    // for (var index = 0; index < _initialList.length; index++) {
+    //   _initialList[index].password =
+    //       DBHelper.encrypter.decrypt64(_initialList[index].password, , iv: DBHelper.iv);
+    // }
+
     _isLoading = false;
     _isDBLoaded = true;
     notifyListeners();
