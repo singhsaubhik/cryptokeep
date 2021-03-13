@@ -113,6 +113,7 @@ You will need the following prerequisites to get started
 - [ ] Support for other platforms than Mobile (ie: Desktop)
 - [ ] Save password on cloud (Firebase)
 - [ ] Support dynamic theme for entire application (ie: Dark / Light)
+- [ ] Add unit test
 
 See the [open issues](https://github.com/singhsaubhik/cryptokeep/issues) for a list of proposed features (and known issues).
 
