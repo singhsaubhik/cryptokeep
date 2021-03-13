@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
   # App third party dependency
+  encrypt: ^4.1.0
   provider: ^4.3.2+3
   local_auth:
   flutter_svg:

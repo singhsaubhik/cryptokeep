@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cryptokeep/utils/encryption.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -73,6 +74,7 @@ class DBHelper {
     table = DBHelper.loginTable,
   }) async {
     Database db = await instance.database;
+    row = encryptRow(row);
     return await db.insert(table, row);
   }
 
@@ -83,6 +85,7 @@ class DBHelper {
 
   Future<int> updateOne(String id, Map<String, dynamic> row) async {
     var db = await instance.database;
+    row = encryptRow(row);
     return await db.update(
       loginTable,
       row,
