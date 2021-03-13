@@ -7,10 +7,15 @@ const kActiveCardColour = Color(0xFF1D1E33);
 const kInactiveCardColour = Color(0xFF1D1E33);
 const kAccentColor = Color(0xFF6dd5ed);
 
+/// Configs constants
 const IS_FIRST_RUN = "isFirstRun";
 const APP_CONFIGS = "cryptokeep_configs";
 const USER_BOX = "cryptokeep_user_box";
 const IS_USER = "IS_USER";
+
+/// Messages constants
+const PASSWORD_COPIED = "Password copied to clipboard";
+const USERNAME_COPIED = "Username copied to clipboard";
 
 const kLabelTextStyle = TextStyle(
   fontSize: 18.0,

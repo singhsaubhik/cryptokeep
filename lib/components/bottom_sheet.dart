@@ -1,8 +1,9 @@
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/services/login_service.dart';
+import 'package:cryptokeep/utils/app_snackbar.dart';
+import 'package:cryptokeep/utils/clipboard_manager.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
-
-
 
 class BottomSheetLayout extends StatelessWidget {
   BottomSheetLayout(this._password);
@@ -20,6 +21,13 @@ class BottomSheetLayout extends StatelessWidget {
         Navigator.of(context).pop();
         Navigator.pushNamed(context, "/update", arguments: this._password);
         break;
+
+      case "Copy":
+        ClipBoardManager().copyToClipboard(login.password);
+        AppSnackBar.show(context, text: PASSWORD_COPIED);
+        Navigator.of(context).pop();
+        break;
+
       default:
         Navigator.of(context).pop();
     }
