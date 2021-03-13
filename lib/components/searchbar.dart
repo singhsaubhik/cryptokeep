@@ -19,7 +19,9 @@ class SearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
-              onChanged: (value) => LoginService.instance(context).filter(value),
+              onChanged: (value) {
+                LoginService.instance(context).filter(value);
+              },
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search Password",
