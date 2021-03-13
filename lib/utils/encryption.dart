@@ -1,16 +1,19 @@
 import 'package:encrypt/encrypt.dart';
 
-// Create a key for encryption
-final key = Key.fromUtf8('my 32 length key................');
-// IV
-final iv = IV.fromLength(16);
-// Create encrypter
-final encrypter =
-    Encrypter(AES(Key.fromUtf8('my 32 length key................')));
+class EncryptionService {
+  final _encryptionKey = Key.fromUtf8("kjkDSAFS34234SDFSXSWWWqaSwerty67");
+  final _iv = IV.fromLength(16);
+  Encrypter _encrypter;
 
-// Encrypt password in the row
-Map<String, dynamic> encryptRow(Map<String, dynamic> row) {
-  row["password"] = encrypter.encrypt(row["password"], iv: iv).base64;
-  print("Encrypted password: " + row["password"]);
-  return row;
+  EncryptionService() {
+    this._encrypter = Encrypter(AES(_encryptionKey));
+  }
+
+  String encrypt(String data) {
+    return _encrypter.encrypt(data, iv: _iv).base64;
+  }
+
+  String decrypt(String data) {
+    return this._encrypter.decrypt64(data, iv: _iv);
+  }
 }

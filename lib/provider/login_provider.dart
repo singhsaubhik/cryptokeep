@@ -29,10 +29,10 @@ class PasswordProvider extends ChangeNotifier {
     for (var v in response) {
       _list.add(Login.fromMap(v));
     }
-    // Decrypt the password in _list
-    for (var index = 0; index < _list.length; index++) {
-      _list[index].password =
-          encrypter.decrypt64(_list[index].password, iv: iv);
+
+    /// Decrypt password before making it object
+    for (final obj in _list) {
+      obj.password = EncryptionService().decrypt(obj.password);
     }
 
     _initialList = _list.toList();
