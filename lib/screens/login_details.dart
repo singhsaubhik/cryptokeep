@@ -1,5 +1,7 @@
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/provider/login_provider.dart';
+import 'package:cryptokeep/utils/app_snackbar.dart';
+import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +49,12 @@ class _LoginDetailsPanel extends StatefulWidget {
 class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
   bool showPassword = false;
 
+  void handleCopyClick(BuildContext context, String data, int type) {
+    ClipBoardManager().copyToClipboard(data);
+    String msg = type == 0 ? USERNAME_COPIED : PASSWORD_COPIED;
+    AppSnackBar.show(context, text: msg);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,8 +69,13 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
               prefixIcon: Icon(
                 Icons.verified_user,
               ),
-              suffix: Icon(
-                Icons.copy,
+              suffix: GestureDetector(
+                onTap: () {
+                  handleCopyClick(context, widget._login.username, 0);
+                },
+                child: Icon(
+                  Icons.copy,
+                ),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -97,8 +110,13 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
                   SizedBox(
                     width: 15,
                   ),
-                  Icon(
-                    Icons.copy,
+                  GestureDetector(
+                    onTap: () {
+                      handleCopyClick(context, widget._login.username, 1);
+                    },
+                    child: Icon(
+                      Icons.copy,
+                    ),
                   ),
                 ],
               ),
@@ -142,10 +160,6 @@ class BuildTopTitle extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          // Text(
-          //   _login.createdAt,
-          //   style: TextStyle(color: Color(0xFFD7D7D7), fontSize: 16),
-          // ),
         ],
       ),
     );

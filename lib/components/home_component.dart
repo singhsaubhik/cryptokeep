@@ -1,6 +1,8 @@
 import 'package:cryptokeep/components/bottom_sheet.dart';
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/provider/login_provider.dart';
+import 'package:cryptokeep/utils/app_snackbar.dart';
+import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,10 +53,9 @@ class PasswordCard extends StatelessWidget {
     Navigator.pushNamed(context, "/update", arguments: this._login);
   }
 
-  void handleCopyClick() {
-    /// TODO: Implement
-    // throw UnimplementedError();
-    print("Copy is clicked");
+  void handleCopyClick(BuildContext context) {
+    ClipBoardManager().copyToClipboard(this._login.password);
+    AppSnackBar.show(context, text: PASSWORD_COPIED);
   }
 
   @override
@@ -125,7 +126,7 @@ class PasswordCard extends StatelessWidget {
                 ButtonWidget(
                   "Copy",
                   borderColor: Colors.blue[200],
-                  onClick: () => handleCopyClick(),
+                  onClick: () => handleCopyClick(context),
                 ),
               ],
             )
