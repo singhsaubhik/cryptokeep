@@ -1,4 +1,4 @@
-import 'package:cryptokeep/repository/repository.dart';
+import 'package:cryptokeep/services/login_service.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +19,14 @@ class SearchBar extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: controller,
-              onChanged: (value) => Repository.instance(context).filter(value),
+              onChanged: (value) => LoginService.instance(context).filter(value),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: "Search Password",
                 suffixIcon: IconButton(
                   splashRadius: 1,
                   onPressed: () {
-                    Repository.instance(context).filter("");
+                    LoginService.instance(context).filter("");
                     controller.clear();
                     FocusScope.of(context).unfocus();
                   },

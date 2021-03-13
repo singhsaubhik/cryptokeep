@@ -1,5 +1,5 @@
 import 'package:cryptokeep/models/user_model.dart';
-import 'package:cryptokeep/repository/user_repository.dart';
+import 'package:cryptokeep/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 class GetStarted extends StatelessWidget {
@@ -45,13 +45,12 @@ class GetStarted extends StatelessWidget {
           title: Text("Get started"),
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-          margin: EdgeInsets.symmetric(vertical: 25),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Form(
             key: _key,
             child: Column(
               children: [
-                SizedBox(height: 30),
+                SizedBox(height: 10),
                 Text(
                   "Welcome to CryptoKeep",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
@@ -61,7 +60,7 @@ class GetStarted extends StatelessWidget {
                   "your own place to securely save all your passwords",
                   style: TextStyle(fontSize: 16, color: Colors.blue.shade200),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 35),
                 TextFormField(
                   controller: nameController,
                   validator: (v) => getValidator(v, "Name"),
@@ -79,15 +78,13 @@ class GetStarted extends StatelessWidget {
                   validator: (v) => getValidator(v, "Master Password"),
                   decoration: getDecoration(context, "Enter master password"),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 15),
                 MaterialButton(
                   color: Theme.of(context).accentColor,
                   minWidth: double.infinity,
                   onPressed: () => this.onSubmit(context),
                   child: Text("Get Started"),
-                ),
-                SizedBox(height: 30),
-                Text("Note: Your all password will be encrypted saved locally.")
+                )
               ],
             ),
           ),

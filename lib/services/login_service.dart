@@ -6,15 +6,15 @@ import 'package:cryptokeep/utils/validations.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Repository {
+class LoginService {
   PasswordProvider _provider;
 
-  Repository._privateConstructor(BuildContext context) {
+  LoginService._privateConstructor(BuildContext context) {
     this._provider = Provider.of<PasswordProvider>(context, listen: false);
   }
 
-  static Repository instance(BuildContext context) =>
-      Repository._privateConstructor(context);
+  static LoginService instance(BuildContext context) =>
+      LoginService._privateConstructor(context);
 
   void filter(String searchText) async {
     _provider.filter(searchText);

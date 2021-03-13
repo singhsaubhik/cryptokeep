@@ -1,6 +1,6 @@
 import 'package:cryptokeep/auth/auth.dart';
 import 'package:cryptokeep/components/splash_component.dart';
-import 'package:cryptokeep/repository/user_repository.dart';
+import 'package:cryptokeep/services/user_service.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
 

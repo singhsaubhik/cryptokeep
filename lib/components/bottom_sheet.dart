@@ -1,6 +1,8 @@
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/repository/repository.dart';
+import 'package:cryptokeep/services/login_service.dart';
 import 'package:flutter/material.dart';
+
+
 
 class BottomSheetLayout extends StatelessWidget {
   BottomSheetLayout(this._password);
@@ -11,7 +13,7 @@ class BottomSheetLayout extends StatelessWidget {
     switch (type) {
       case "Delete":
         Navigator.of(context).pop();
-        Repository.instance(context).handleDeleteCard(login);
+        LoginService.instance(context).handleDeleteCard(login);
         break;
 
       case "Edit":

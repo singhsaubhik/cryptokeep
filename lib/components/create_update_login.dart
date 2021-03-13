@@ -1,5 +1,5 @@
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/repository/repository.dart';
+import 'package:cryptokeep/services/login_service.dart';
 import 'package:cryptokeep/themes/app_theme.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +33,10 @@ class CreateUpdateDialog extends StatelessWidget {
     };
 
     if (_type == CreateUpdateType.create) {
-      Repository.instance(context).createLogin(Login.fromValue(value));
+      LoginService.instance(context).createLogin(Login.fromValue(value));
     } else {
       login.update(value);
-      Repository.instance(context).updateLogin(login.id, login);
+      LoginService.instance(context).updateLogin(login.id, login);
     }
     Navigator.pop(context);
   }
