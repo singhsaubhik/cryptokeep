@@ -13,7 +13,6 @@ class BottomSheetLayout extends StatelessWidget {
   void _handleItemClick(BuildContext context, String type, Login login) {
     switch (type) {
       case "Delete":
-        Navigator.of(context).pop();
         LoginService.instance(context).handleDeleteCard(login);
         break;
 
