@@ -19,7 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
     AppAuthentication()
         .initAuth()
-        .then((value) => handleBiometricsAuthentication(value));
+        .then((value) => handleBiometricsAuthentication(value))
+        .catchError((onError) => handleBiometricsAuthentication(false));
   }
 
   void handleBiometricsAuthentication(value) {
