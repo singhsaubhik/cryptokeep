@@ -112,7 +112,7 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      handleCopyClick(context, widget._login.username, 1);
+                      handleCopyClick(context, widget._login.password, 1);
                     },
                     child: Icon(
                       Icons.copy,
