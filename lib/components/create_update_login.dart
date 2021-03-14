@@ -66,20 +66,22 @@ class CreateUpdateDialog extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: 15,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(height: 20),
-              _CreateUpdateForm(
-                formKey: _formKey,
-                titleController: titleController,
-                usernameController: usernameController,
-                passwordController: passwordController,
-              ),
-              _CreateUpdateActions(
-                onSubmit: () => onSubmit(context, login: _login),
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 20),
+                _CreateUpdateForm(
+                  formKey: _formKey,
+                  titleController: titleController,
+                  usernameController: usernameController,
+                  passwordController: passwordController,
+                ),
+                _CreateUpdateActions(
+                  onSubmit: () => onSubmit(context, login: _login),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -48,44 +48,46 @@ class GetStarted extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Form(
             key: _key,
-            child: Column(
-              children: [
-                SizedBox(height: 10),
-                Text(
-                  "Welcome to CryptoKeep",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  "your own place to securely save all your passwords",
-                  style: TextStyle(fontSize: 16, color: Colors.blue.shade200),
-                ),
-                SizedBox(height: 35),
-                TextFormField(
-                  controller: nameController,
-                  validator: (v) => getValidator(v, "Name"),
-                  decoration: getDecoration(context, "Enter Full name"),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: emailController,
-                  validator: (v) => getValidator(v, "Email"),
-                  decoration: getDecoration(context, "Enter email"),
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: masterPassController,
-                  validator: (v) => getValidator(v, "Master Password"),
-                  decoration: getDecoration(context, "Enter master password"),
-                ),
-                SizedBox(height: 15),
-                MaterialButton(
-                  color: Theme.of(context).accentColor,
-                  minWidth: double.infinity,
-                  onPressed: () => this.onSubmit(context),
-                  child: Text("Get Started"),
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    "Welcome to CryptoKeep",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    "your own place to securely save all your passwords",
+                    style: TextStyle(fontSize: 16, color: Colors.blue.shade200),
+                  ),
+                  SizedBox(height: 35),
+                  TextFormField(
+                    controller: nameController,
+                    validator: (v) => getValidator(v, "Name"),
+                    decoration: getDecoration(context, "Enter Full name"),
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    controller: emailController,
+                    validator: (v) => getValidator(v, "Email"),
+                    decoration: getDecoration(context, "Enter email"),
+                  ),
+                  SizedBox(height: 10),
+                  TextFormField(
+                    controller: masterPassController,
+                    validator: (v) => getValidator(v, "Master Password"),
+                    decoration: getDecoration(context, "Enter master password"),
+                  ),
+                  SizedBox(height: 15),
+                  MaterialButton(
+                    color: Theme.of(context).accentColor,
+                    minWidth: double.infinity,
+                    onPressed: () => this.onSubmit(context),
+                    child: Text("Get Started"),
+                  )
+                ],
+              ),
             ),
           ),
         ),
