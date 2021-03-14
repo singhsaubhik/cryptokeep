@@ -1,9 +1,16 @@
 import 'package:cryptokeep/auth/auth.dart';
+import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/common.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-void handleFingerPress(Function onFingerPrint) {
-  AppAuthentication().initAuth().then((value) => onFingerPrint(value));
+void handleFingerPress(BuildContext context, Function onFingerPrint) {
+  AppAuthentication()
+      .initAuth()
+      .then((value) => onFingerPrint(value))
+      .catchError((onError) {
+    AppSnackBar.show(context, text: FINGERPRINT_NOT_SUPPORTED);
+  });
 }
 
 Widget getTextBoxOrTitle(
@@ -33,6 +40,7 @@ class PasswordInput extends StatelessWidget {
   final _key = GlobalKey<FormState>();
 
   PasswordInput(this._controller, this._onSubmit, this._onFingerPrint);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -83,7 +91,7 @@ class PasswordInput extends StatelessWidget {
           height: 20,
         ),
         GestureDetector(
-          onTap: () => handleFingerPress(_onFingerPrint),
+          onTap: () => handleFingerPress(context, _onFingerPrint),
           child: Icon(
             Icons.fingerprint_rounded,
             size: 40,
