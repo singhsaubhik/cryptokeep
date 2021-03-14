@@ -2,8 +2,10 @@ import 'package:cryptokeep/services/login_service.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+final controller = TextEditingController();
+
 class SearchBar extends StatelessWidget {
-  final controller = TextEditingController();
+  const SearchBar();
 
   @override
   Widget build(BuildContext context) {
