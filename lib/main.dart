@@ -10,12 +10,20 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 
+const kChannel = "com.singhsaubhik.cryptokeep/screencatpure";
+
 void setSystemSettings() {
   final settings = SystemUiOverlayStyle(
     systemNavigationBarColor: kScaffoldBackgroundColor, // navigation bar color,
     systemNavigationBarIconBrightness: Brightness.dark, //navigation bar icon
   );
   SystemChrome.setSystemUIOverlayStyle(settings);
+}
+
+Future<dynamic> setConfigs() async {
+  /// TODO: Apply disableCaptureScreen on the basis of config
+  const MethodChannel _channel = const MethodChannel(kChannel);
+  return await _channel.invokeMethod("disableScreenCapture");
 }
 
 void main() async {
@@ -25,11 +33,9 @@ void main() async {
   Directory _directory = await getApplicationDocumentsDirectory();
   Hive.init(_directory.path);
   final box = await Hive.openBox(USER_BOX);
-  final isFirstRun = box.get(IS_USER, defaultValue: null);
-
-  // box.put(IS_FIRST_RUN, true);
-
-  runApp(MyApp(isFirstRun));
+  final isUser = box.get(IS_USER, defaultValue: null);
+  await setConfigs();
+  runApp(MyApp(isUser));
 }
 
 class MyApp extends StatelessWidget {
