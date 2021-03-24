@@ -17,6 +17,8 @@ const MASTER_PASSWORD = "masterPassword";
 /// Messages constants
 const PASSWORD_COPIED = "Password copied to clipboard";
 const USERNAME_COPIED = "Username copied to clipboard";
+const FINGERPRINT_NOT_SUPPORTED =
+    "Fingerprint Authentication is not supported on this device";
 
 /// Configs constants
 const CONFIGS = "CONFIGS";
