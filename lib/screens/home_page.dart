@@ -1,15 +1,16 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
-import 'package:cryptokeep/provider/login_provider.dart';
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  final controller = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     /// TODO: Remove ADD button from here and give it to PasswordGrid
 
-    final provider = Provider.of<PasswordProvider>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -18,16 +19,27 @@ class HomePage extends StatelessWidget {
           titleSpacing: 24,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
+          actions: [
+            IconButton(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.pushNamed(context, "/settings");
+              },
+            ),
+          ],
         ),
-        floatingActionButton: Visibility(
-          visible: provider.showAddButton,
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed("/create");
-            },
-            child: Icon(Icons.add),
-          ),
-        ),
+        floatingActionButton: Obx(() {
+          return Visibility(
+            visible: controller.showAddButton.value,
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/create");
+              },
+              child: Icon(Icons.add),
+            ),
+          );
+        }),
         body: Column(
           children: [
             const SearchBar(),
