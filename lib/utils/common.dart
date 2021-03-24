@@ -1,2 +1,2 @@
 enum AuthType { fingerprint, password }
-enum CreateUpdateType { create, update }
+enum LoginAction { create, update }

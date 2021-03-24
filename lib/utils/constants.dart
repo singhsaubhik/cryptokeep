@@ -12,42 +12,22 @@ const IS_FIRST_RUN = "isFirstRun";
 const APP_CONFIGS = "cryptokeep_configs";
 const USER_BOX = "cryptokeep_user_box";
 const IS_USER = "IS_USER";
+const MASTER_PASSWORD = "masterPassword";
 
 /// Messages constants
 const PASSWORD_COPIED = "Password copied to clipboard";
 const USERNAME_COPIED = "Username copied to clipboard";
 
-const kLabelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: Color(0xFF8D8E98),
-);
+/// Configs constants
+const CONFIGS = "CONFIGS";
+const SETTINGS_CONFIG_BOX = "SETTINGS_CONFIG_BOX";
+const CHANNEL = "com.singhsaubhik.cryptokeep/screencatpure";
 
-const kNumberTextStyle = TextStyle(
-  fontSize: 50.0,
-  fontWeight: FontWeight.w900,
-);
-
-const kLargeButtonTextStyle = TextStyle(
-  fontSize: 25.0,
-  fontWeight: FontWeight.bold,
-);
-
-const kTitleTextStyle = TextStyle(
-  fontSize: 50.0,
-  fontWeight: FontWeight.bold,
-);
-
-const kResultTextStyle = TextStyle(
-  color: Color(0xFF24D876),
-  fontSize: 22.0,
-  fontWeight: FontWeight.bold,
-);
-
-const kBMITextStyle = TextStyle(
-  fontSize: 100.0,
-  fontWeight: FontWeight.bold,
-);
-
-const kBodyTextStyle = TextStyle(
-  fontSize: 22.0,
-);
+const IS_DARK_THEME = "IS_DARK_THEME";
+const DISABLE_SCREEN_CAPTURE = "DISABLE_SCREEN_CAPTURE";
+const LOGIN_WITH_FP = "LOGIN_WITH_FP";
+const DEFAULT_CONFIGS = {
+  DISABLE_SCREEN_CAPTURE: true,
+  IS_DARK_THEME: true,
+  LOGIN_WITH_FP: false
+};
