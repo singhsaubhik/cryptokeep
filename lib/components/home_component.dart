@@ -1,45 +1,37 @@
 import 'package:cryptokeep/components/bottom_sheet.dart';
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class PasswordGrid extends StatelessWidget {
+class PasswordGrid extends GetView<HomeController> {
   final List<Login> passwordList = [];
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PasswordProvider>(context);
-    final _controller = ScrollController();
-
-    _controller.addListener(() {
-      if (_controller.position.pixels == _controller.position.maxScrollExtent) {
-        provider.setShowAddButton(false);
-      } else {
-        provider.setShowAddButton(true);
-      }
-    });
-
-    return provider.isLoading
-        ? Center(
-            child: CircularProgressIndicator(),
-          )
-        : Expanded(
-            child: GridView.count(
-              controller: _controller,
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                for (var data in provider.passwordList())
-                  PasswordCard(Key(data.id), data)
-              ],
-            ),
-          );
+    return Obx(
+      () {
+        return controller.isLoading.value
+            ? CircularProgressIndicator()
+            : Expanded(
+                child: GridView.count(
+                  controller: controller.scrollController,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                    for (var data in controller.loginList)
+                      PasswordCard(Key(data.id), data)
+                  ],
+                ),
+              );
+      },
+    );
   }
 }
 
@@ -67,6 +59,7 @@ class PasswordCard extends StatelessWidget {
           "/login_details",
           arguments: this._login.id,
         );
+        // print(this._login.title);
       },
       onLongPress: () {
         showModalBottomSheet(

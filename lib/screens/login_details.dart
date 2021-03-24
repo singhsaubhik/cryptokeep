@@ -1,17 +1,15 @@
+import 'package:cryptokeep/controller/login_details_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/provider/login_provider.dart';
-import 'package:cryptokeep/utils/app_snackbar.dart';
-import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class LoginDetails extends StatelessWidget {
+class LoginDetails extends GetView<LoginDetailsController> {
+  final controller = Get.put(LoginDetailsController());
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PasswordProvider>(context);
-    final String id = ModalRoute.of(context).settings.arguments;
-    final Login _login = provider.getItemById(id);
+    final _login = controller.getLoginById();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -37,23 +35,10 @@ class LoginDetails extends StatelessWidget {
   }
 }
 
-class _LoginDetailsPanel extends StatefulWidget {
-  const _LoginDetailsPanel(this._login);
-
+class _LoginDetailsPanel extends GetView<LoginDetailsController> {
   final Login _login;
 
-  @override
-  __LoginDetailsPanelState createState() => __LoginDetailsPanelState();
-}
-
-class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
-  bool showPassword = false;
-
-  void handleCopyClick(BuildContext context, String data, int type) {
-    ClipBoardManager().copyToClipboard(data);
-    String msg = type == 0 ? USERNAME_COPIED : PASSWORD_COPIED;
-    AppSnackBar.show(context, text: msg);
-  }
+  const _LoginDetailsPanel(this._login);
 
   @override
   Widget build(BuildContext context) {
@@ -63,16 +48,14 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
         children: [
           TextFormField(
             readOnly: true,
-            controller: TextEditingController(text: widget._login.username),
+            controller: TextEditingController(text: _login.username),
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.verified_user,
               ),
               suffix: GestureDetector(
-                onTap: () {
-                  handleCopyClick(context, widget._login.username, 0);
-                },
+                onTap: () => controller.onCopyClick(_login.username, 0),
                 child: Icon(
                   Icons.copy,
                 ),
@@ -85,48 +68,46 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
             ),
           ),
           SizedBox(height: 10),
-          TextFormField(
-            obscureText: !this.showPassword,
-            readOnly: true,
-            controller: TextEditingController(text: widget._login.password),
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.lock,
-              ),
-              suffix: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    child: Icon(
-                      showPassword ? Icons.visibility_off : Icons.visibility,
+          Obx(() {
+            return TextFormField(
+              obscureText: !controller.showPassword.value,
+              readOnly: true,
+              controller: TextEditingController(text: _login.password),
+              style: TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.lock,
+                ),
+                suffix: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () => controller.toggleShowPassword(),
+                      child: Icon(
+                        controller.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      handleCopyClick(context, widget._login.password, 1);
-                    },
-                    child: Icon(
-                      Icons.copy,
+                    SizedBox(
+                      width: 15,
                     ),
+                    GestureDetector(
+                      onTap: () => controller.onCopyClick(_login.password, 1),
+                      child: Icon(
+                        Icons.copy,
+                      ),
+                    ),
+                  ],
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white.withOpacity(.7),
                   ),
-                ],
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(.7),
                 ),
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

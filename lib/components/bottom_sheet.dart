@@ -1,11 +1,12 @@
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/services/login_service.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BottomSheetLayout extends StatelessWidget {
+class BottomSheetLayout extends GetView<HomeController> {
   BottomSheetLayout(this._password);
 
   final Login _password;
@@ -13,7 +14,7 @@ class BottomSheetLayout extends StatelessWidget {
   void _handleItemClick(BuildContext context, String type, Login login) {
     switch (type) {
       case "Delete":
-        LoginService.instance(context).handleDeleteCard(login);
+        controller.handleDeleteCard(context, login);
         break;
 
       case "Edit":
