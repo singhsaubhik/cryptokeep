@@ -154,7 +154,7 @@ Email: saubhik.singh01@gmail.com
 * [Font Awesome](https://fontawesome.com/)
 
 ### Libraries / Packages
-* [Provider](https://pub.dev/packages/provider)
+* [GetX](https://pub.dev/packages/get)
 * [local_auth](https://pub.dev/packages/local_auth)
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
 * [sqflite](https://pub.dev/packages/sqflite)
