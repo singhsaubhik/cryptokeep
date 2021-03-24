@@ -1,10 +1,11 @@
-import 'package:cryptokeep/services/login_service.dart';
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-final controller = TextEditingController();
+final _controller = TextEditingController();
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends GetView<HomeController> {
   const SearchBar();
 
   @override
@@ -20,9 +21,9 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              controller: controller,
+              controller: _controller,
               onChanged: (value) {
-                LoginService.instance(context).filter(value);
+                controller.filter(_controller.text);
               },
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -30,8 +31,8 @@ class SearchBar extends StatelessWidget {
                 suffixIcon: IconButton(
                   splashRadius: 1,
                   onPressed: () {
-                    LoginService.instance(context).filter("");
-                    controller.clear();
+                    controller.filter("");
+                    _controller.clear();
                     FocusScope.of(context).unfocus();
                   },
                   icon: Icon(Icons.clear),
