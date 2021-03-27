@@ -5,14 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:hive/hive.dart';
 
-const LOGIN_W_FP = "LOGIN_WITH_FINGER_PRINT";
-const DARK_MODE = "DARK_MODE";
-const BLOCK_SCREEN_SHOTS = "BLOCK_SCREEN_SHOTS";
-
 class SettingsController extends GetxController {
-  var loginWithFingerPrint = false;
-  var darkMode = true;
-  var blockScreenshot = true;
+  var loginWithFingerPrint = false.obs;
+  var darkMode = true.obs;
+  var blockScreenshot = true.obs;
+  var clearClipboard = false.obs;
   var configBox;
 
   @override
@@ -20,35 +17,36 @@ class SettingsController extends GetxController {
     configBox = Hive.box<dynamic>(SETTINGS_CONFIG_BOX);
     final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
 
-    loginWithFingerPrint = configs[LOGIN_WITH_FP];
-    darkMode = configs[IS_DARK_THEME];
-    blockScreenshot = configs[DISABLE_SCREEN_CAPTURE];
+    loginWithFingerPrint.value = configs[LOGIN_WITH_FP];
+    darkMode.value = configs[IS_DARK_THEME];
+    blockScreenshot.value = configs[DISABLE_SCREEN_CAPTURE];
+    clearClipboard.value = configs[CLEAR_CLIPBOARD];
 
     super.onInit();
   }
 
   void setLoginWithFingerprint(bool value) {
-    loginWithFingerPrint = value;
+    loginWithFingerPrint.value = value;
     final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
-
-    final newConfigs = {
-      LOGIN_WITH_FP: value,
-      IS_DARK_THEME: configs[IS_DARK_THEME],
-      DISABLE_SCREEN_CAPTURE: configs[DISABLE_SCREEN_CAPTURE]
-    };
-
+    final newConfigs = Map.from(configs);
+    newConfigs[LOGIN_WITH_FP] = value;
     configBox.put(CONFIGS, newConfigs);
-    update([LOGIN_W_FP]);
   }
 
   void setDarkMode(bool value) {
-    darkMode = value;
-    update([DARK_MODE]);
+    darkMode.value = value;
   }
 
   void blockScreenShots(bool value) {
-    blockScreenshot = value;
-    update([BLOCK_SCREEN_SHOTS]);
+    blockScreenshot.value = value;
+  }
+
+  void setClearClipboard(bool val) {
+    clearClipboard.value = val;
+    final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    final newConfigs = Map.from(configs);
+    newConfigs[CLEAR_CLIPBOARD] = val;
+    configBox.put(CONFIGS, newConfigs);
   }
 
   void changeMasterPassword(BuildContext context, value) async {
