@@ -1,68 +1,66 @@
 import 'package:cryptokeep/controller/settings_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends GetView<SettingsController> {
+  final controller = Get.put(SettingsController());
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            title: Text("Settings"),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 16),
-                GestureDetector(
-                  onTap: () => showDialog(
+        appBar: AppBar(
+          elevation: 0,
+          title: Text("Settings"),
+        ),
+        body: SingleChildScrollView(
+          child: Obx(
+            () {
+              return Column(
+                children: [
+                  SizedBox(height: 16),
+                  GestureDetector(
+                    onTap: () => showDialog(
                       context: context,
                       builder: (context) {
                         return ChangeMasterPassword();
-                      }),
-                  child: SettingItem(
-                    title: "Change Master Password",
-                    icon: Icons.lock,
+                      },
+                    ),
+                    child: SettingItem(
+                      title: "Change Master Password",
+                      icon: Icons.lock,
+                    ),
                   ),
-                ),
-                GetBuilder<SettingsController>(
-                  id: LOGIN_W_FP,
-                  init: SettingsController(),
-                  builder: (_) {
-                    return SettingItem2(
-                      title: "Login with fingerprint",
-                      icon: Icons.fingerprint,
-                      value: _.loginWithFingerPrint,
-                      onChange: (v) => _.setLoginWithFingerprint(v),
-                    );
-                  },
-                ),
-                GetBuilder<SettingsController>(
-                  id: DARK_MODE,
-                  builder: (_) {
-                    return SettingItem2(
-                      title: "Dark Mode",
-                      icon: Icons.brightness_2_outlined,
-                      value: _.darkMode,
-                      onChange: (v) => _.setDarkMode(v),
-                    );
-                  },
-                ),
-                GetBuilder<SettingsController>(
-                  id: BLOCK_SCREEN_SHOTS,
-                  builder: (_) {
-                    return SettingItem2(
-                      title: "Block Screenshots",
-                      icon: Icons.stop_screen_share_outlined,
-                      value: _.blockScreenshot,
-                      onChange: (v) => _.blockScreenShots(v),
-                    );
-                  },
-                ),
-              ],
-            ),
-          )),
+                  SettingItem2(
+                    title: "Login with fingerprint",
+                    icon: Icons.fingerprint,
+                    value: controller.loginWithFingerPrint.value,
+                    onChange: (v) => controller.setLoginWithFingerprint(v),
+                  ),
+                  SettingItem2(
+                    title: "Dark Mode",
+                    icon: Icons.brightness_2_outlined,
+                    value: controller.darkMode.value,
+                    onChange: (v) => controller.setDarkMode(v),
+                  ),
+                  SettingItem2(
+                    title: "Block Screenshots",
+                    icon: Icons.stop_screen_share_outlined,
+                    value: controller.blockScreenshot.value,
+                    onChange: (v) => controller.blockScreenShots(v),
+                  ),
+                  SettingItem2(
+                    title: "Clean clipboard",
+                    icon: Icons.cleaning_services_rounded,
+                    value: controller.clearClipboard.value,
+                    onChange: (v) => controller.setClearClipboard(v),
+                  )
+                ],
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }

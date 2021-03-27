@@ -1,6 +1,7 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
 import 'package:cryptokeep/controller/home_controller.dart';
+import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,9 +24,7 @@ class HomePage extends StatelessWidget {
             IconButton(
               padding: EdgeInsets.symmetric(horizontal: 20),
               icon: Icon(Icons.settings),
-              onPressed: () {
-                Navigator.pushNamed(context, "/settings");
-              },
+              onPressed: () => unfocusAndNavigate(context, "/settings"),
             ),
           ],
         ),
@@ -33,9 +32,7 @@ class HomePage extends StatelessWidget {
           return Visibility(
             visible: controller.showAddButton.value,
             child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed("/create");
-              },
+              onPressed: () => unfocusAndNavigate(context, "/create"),
               child: Icon(Icons.add),
             ),
           );
