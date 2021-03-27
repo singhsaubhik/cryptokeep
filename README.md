@@ -22,8 +22,6 @@
   <p align="center">
     An awesome password manager for all your password need.
     <br />
-    <a href="https://github.com/singhsaubhik/cryptokeep">View Demo</a>
-    ·
     <a href="https://github.com/singhsaubhik/cryptokeep/issues">Report Bug</a>
     ·
     <a href="https://github.com/singhsaubhik/cryptokeep/issues">Request Feature</a>
