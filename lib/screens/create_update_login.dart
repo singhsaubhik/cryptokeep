@@ -79,6 +79,7 @@ class _CreateUpdateForm extends GetView<CreateUpdateController> {
             controller.titleController,
             "Enter Title",
             prefixIcon: Icons.text_fields,
+            validator: (v) => controller.titleValidator(v),
           ),
           SizedBox(
             height: 10,
@@ -87,6 +88,7 @@ class _CreateUpdateForm extends GetView<CreateUpdateController> {
             controller.usernameController,
             "Enter User Name",
             prefixIcon: Icons.supervised_user_circle_outlined,
+            validator: (v) => controller.usernameValidator(v),
           ),
           SizedBox(
             height: 10,
@@ -96,6 +98,7 @@ class _CreateUpdateForm extends GetView<CreateUpdateController> {
             "Enter Password",
             obscureText: true,
             prefixIcon: Icons.lock,
+            validator: (v) => controller.passwordValidator(v),
           ),
           SizedBox(
             height: 25,
@@ -108,25 +111,20 @@ class _CreateUpdateForm extends GetView<CreateUpdateController> {
 
 class _CreateUpdateInput extends StatelessWidget {
   const _CreateUpdateInput(this._controller, this.hintText,
-      {this.obscureText = false, this.prefixIcon});
+      {this.obscureText = false, this.prefixIcon, this.validator});
 
   final TextEditingController _controller;
   final String hintText;
   final bool obscureText;
   final IconData prefixIcon;
+  final Function validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
       obscureText: this.obscureText,
-      validator: (value) {
-        /// TODO: Add separate validator for each field
-        if (value.isEmpty) {
-          return "Please enter value";
-        }
-        return null;
-      },
+      validator: (v) => validator(v),
       style: TextStyle(color: Colors.white),
       decoration: AppTheme.textFieldDecoration.copyWith(
         hintText: this.hintText,
