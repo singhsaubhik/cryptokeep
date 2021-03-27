@@ -45,6 +45,8 @@ class CreateUpdateController extends GetxController {
       "password": passwordController.value.text
     };
 
+    if (!formKey.currentState.validate()) return;
+
     if (Get.currentRoute == "/create") {
       _controller.add(Login.fromValue(value));
     } else {
@@ -52,5 +54,26 @@ class CreateUpdateController extends GetxController {
       _controller.updateItem(login.id, login);
     }
     Navigator.pop(context);
+  }
+
+  /// Validators //////////////////////////////////
+  /// //////////////////////////////////////////////
+
+  String titleValidator(String v) {
+    if (v.isEmpty) return "Please enter title";
+    return null;
+  }
+
+  String usernameValidator(String v) {
+    if (v.isEmpty) return "Please enter username";
+    return null;
+  }
+
+  String passwordValidator(String v) {
+    if (v.isEmpty) return "Please enter password";
+    if (!GetUtils.isLengthBetween(v, 6, 128))
+      return "Password length should be between 6-128 chars";
+
+    return null;
   }
 }
