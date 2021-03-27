@@ -22,8 +22,9 @@ class LoginDetailsController extends GetxController {
     return homeController.getItemById(id);
   }
 
-  void onCopyClick(String data, int type) {
-    ClipBoardManager().copyToClipboard(data);
+  void onCopyClick(String data, int type) async {
+    final clipboardManager = ClipBoardManager();
+    clipboardManager.copyToClipboard(data);
     String msg = type == 0 ? USERNAME_COPIED : PASSWORD_COPIED;
     AppSnackBar.show(Get.context, text: msg);
   }
