@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class SplashController extends GetxController {
+  final masterPasswordController = TextEditingController(text: "");
+  final key = GlobalKey<FormState>();
   var configs;
 
   @override
@@ -17,18 +19,24 @@ class SplashController extends GetxController {
     loginWithFP(isAppStart: true);
   }
 
-  @override
-  void onClose() {
-    print("OnClose called");
-    super.onClose();
+  void loginWithPassword(BuildContext context) {
+    if (!key.currentState.validate()) return;
   }
 
-  void loginWithPassword(BuildContext context, String password) {
+  String passwordValidator(String val) {
+    /// TODO: Add more validation
     final user = Hive.box<dynamic>(USER_BOX).get(IS_USER);
     final userPassword = EncryptionService().decrypt(user[MASTER_PASSWORD]);
-    if (password == userPassword) {
-      Navigator.pushReplacementNamed(context, "/home");
+    final context = Get.context;
+
+    if (val.isEmpty) return "Please enter password";
+
+    if (masterPasswordController.text != userPassword) {
+      AppSnackBar.show(context, text: "Incorrect password");
+      return "Incorrect password";
     }
+    Navigator.pushReplacementNamed(context, "/home");
+    return null;
   }
 
   void loginWithFP({isAppStart = false}) async {
@@ -37,7 +45,7 @@ class SplashController extends GetxController {
       final isAuthenticated = await AppAuthentication().initAuth();
 
       if (isAuthenticated) {
-        Navigator.pushNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, "/home");
       }
     } else if (!isAppStart) {
       AppSnackBar.show(context, text: "Login with FingerPrint is disabled");
