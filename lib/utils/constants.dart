@@ -28,8 +28,10 @@ const CHANNEL = "com.singhsaubhik.cryptokeep/screencatpure";
 const IS_DARK_THEME = "IS_DARK_THEME";
 const DISABLE_SCREEN_CAPTURE = "DISABLE_SCREEN_CAPTURE";
 const LOGIN_WITH_FP = "LOGIN_WITH_FP";
+const CLEAR_CLIPBOARD = "CLEAR_CLIPBOARD";
 const DEFAULT_CONFIGS = {
   DISABLE_SCREEN_CAPTURE: true,
   IS_DARK_THEME: true,
-  LOGIN_WITH_FP: false
+  LOGIN_WITH_FP: false,
+  CLEAR_CLIPBOARD: false
 };
