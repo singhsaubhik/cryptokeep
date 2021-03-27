@@ -3,6 +3,7 @@ import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/clipboard_manager.dart';
+import 'package:cryptokeep/utils/common.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,8 +42,7 @@ class PasswordCard extends StatelessWidget {
   final Login _login;
 
   void handleEditClick(BuildContext context) {
-    // Repository.instance(context).handleCreateUpdate("update", this._password);
-    Navigator.pushNamed(context, "/update", arguments: this._login);
+    unfocusAndNavigate(context, "/update", arguments: this._login);
   }
 
   void handleCopyClick(BuildContext context) {
@@ -54,12 +54,8 @@ class PasswordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          "/login_details",
-          arguments: this._login.id,
-        );
-        // print(this._login.title);
+        unfocusAndNavigate(context, "/login_details",
+            arguments: this._login.id);
       },
       onLongPress: () {
         showModalBottomSheet(

@@ -37,7 +37,7 @@ class MyApp extends GetView<AppController> {
           controller.isDarkTheme.value ? ThemeMode.dark : ThemeMode.light,
       routes: appRoutes,
       initialRoute: isUser == null ? "/get_started" : "/splash",
-      // initialRoute: "/home",
+      // initialRoute: "/get_started",
     );
   }
 }
