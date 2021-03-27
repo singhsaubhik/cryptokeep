@@ -50,32 +50,22 @@ class SplashScreen extends StatelessWidget {
 }
 
 class LoginForm extends GetView<SplashController> {
-  final _controller = TextEditingController(text: "");
-  final _key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Form(
-        key: _key,
+        key: controller.key,
         child: TextFormField(
-          controller: _controller,
+          controller: controller.masterPasswordController,
           autocorrect: false,
           obscureText: true,
           enableSuggestions: false,
           style: TextStyle(color: Colors.white),
-          validator: (value) {
-            if (value.isEmpty) return "Enter master password";
-            return null;
-          },
+          validator: (v) => controller.passwordValidator(v),
           decoration: InputDecoration(
             suffixIcon: GestureDetector(
-              onTap: () {
-                if (_key.currentState.validate()) {
-                  controller.loginWithPassword(context, "1234");
-                }
-              },
+              onTap: () => controller.loginWithPassword(context),
               child: Icon(
                 Icons.lock_open_outlined,
                 color: Colors.white70,
