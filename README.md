@@ -3,7 +3,7 @@
 
 <br />
 
-[![Amazon App Store][amazon-app-store-badge]][contributors-url]
+[![Amazon App Store][amazon-app-store-badge]][amazon-app-store-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
