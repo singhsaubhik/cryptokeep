@@ -85,7 +85,10 @@ class GetStarted extends StatelessWidget {
                   SizedBox(height: 5),
                   Text(
                     "Your own place to securely save all your passwords",
-                    style: TextStyle(fontSize: 16, color: Colors.blue.shade200,),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.blue.shade200,
+                    ),
                   ),
                   SizedBox(height: 35),
                   TextFormField(
