@@ -3,6 +3,7 @@
 
 <br />
 
+[![Amazon App Store][amazon-app-store-badge]][contributors-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
@@ -170,3 +171,5 @@ Email: saubhik.singh01@gmail.com
 [issues-url]: https://github.com/singhsaubhik/cryptokeep/issues
 [license-shield]: https://img.shields.io/github/license/singhsaubhik/cryptokeep.svg?style=for-the-badge
 [license-url]: https://github.com/singhsaubhik/cryptokeep/blob/master/LICENSE
+[amazon-app-store-badge]: https://img.shields.io/badge/Amazon%20Developer-Store-blue.svg?&style=for-the-badge&logo=amazon-aws&logoColor=white
+[amazon-app-store-url]: https://www.amazon.com/gp/product/B08Z7SFQZK
