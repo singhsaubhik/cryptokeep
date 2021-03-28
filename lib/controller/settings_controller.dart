@@ -10,6 +10,9 @@ class SettingsController extends GetxController {
   var darkMode = true.obs;
   var blockScreenshot = true.obs;
   var clearClipboard = false.obs;
+
+  var cleanupDelay = 30.obs;
+
   var configBox;
 
   @override
@@ -21,6 +24,7 @@ class SettingsController extends GetxController {
     darkMode.value = configs[IS_DARK_THEME];
     blockScreenshot.value = configs[DISABLE_SCREEN_CAPTURE];
     clearClipboard.value = configs[CLEAR_CLIPBOARD];
+    cleanupDelay.value = configs[CLEAN_UP_DELAY];
 
     super.onInit();
   }
@@ -73,5 +77,13 @@ class SettingsController extends GetxController {
 
     Navigator.pop(context);
     AppSnackBar.show(context, text: "Successfully updated");
+  }
+
+  void setCleanupDelay(int value) {
+    cleanupDelay.value = value;
+    final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    final newConfigs = Map.from(configs);
+    newConfigs[CLEAN_UP_DELAY] = value;
+    configBox.put(CONFIGS, newConfigs);
   }
 }
