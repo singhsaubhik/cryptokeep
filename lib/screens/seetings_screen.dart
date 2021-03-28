@@ -1,4 +1,5 @@
 import 'package:cryptokeep/controller/settings_controller.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,9 +10,12 @@ class Settings extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Text("Settings"),
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, 80),
+          child: AppBar(
+            elevation: 0,
+            title: Text("Settings"),
+          ),
         ),
         body: SingleChildScrollView(
           child: Obx(
@@ -31,6 +35,9 @@ class Settings extends GetView<SettingsController> {
                       icon: Icons.lock,
                     ),
                   ),
+                  Divider(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
                   SettingItem2(
                     title: "Login with fingerprint",
                     icon: Icons.fingerprint,
@@ -49,12 +56,30 @@ class Settings extends GetView<SettingsController> {
                     value: controller.blockScreenshot.value,
                     onChange: (v) => controller.blockScreenShots(v),
                   ),
+                  Divider(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
                   SettingItem2(
                     title: "Clean clipboard",
                     icon: Icons.cleaning_services_rounded,
                     value: controller.clearClipboard.value,
                     onChange: (v) => controller.setClearClipboard(v),
-                  )
+                  ),
+                  Visibility(
+                    visible: controller.clearClipboard.value,
+                    child: GestureDetector(
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ChangeCleanupTime();
+                        },
+                      ),
+                      child: SettingItem(
+                        title: "Clipboard cleanup timeout",
+                        icon: Icons.timelapse,
+                      ),
+                    ),
+                  ),
                 ],
               );
             },
@@ -132,13 +157,6 @@ class SettingItem2 extends StatelessWidget {
   }
 }
 
-class CleanClipboard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 class ChangeMasterPassword extends GetView<SettingsController> {
   final currentPassword = TextEditingController();
   final newPassword = TextEditingController();
@@ -185,6 +203,40 @@ class ChangeMasterPassword extends GetView<SettingsController> {
             controller.changeMasterPassword(context, value);
           },
           child: Text("Save"),
+        ),
+      ],
+    );
+  }
+}
+
+class ChangeCleanupTime extends GetView<SettingsController> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Choose delay"),
+      content: Obx(
+        () {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: CLEAR_CLIPBOARD_TIMEOUT_OPTIONS.map((e) {
+              return RadioListTile(
+                title: Text("$e seconds"),
+                value: e,
+                groupValue: controller.cleanupDelay.value,
+                onChanged: (v) => controller.setCleanupDelay(v),
+              );
+            }).toList(),
+          );
+        },
+      ),
+      actions: [
+        MaterialButton(
+          color: Colors.blue,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text("Ok"),
         ),
       ],
     );
