@@ -11,9 +11,9 @@ class ClipBoardManager {
 
     var box = Hive.box<dynamic>(SETTINGS_CONFIG_BOX);
     var configs = box.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    int cleanupDelay = configs[CLEAN_UP_DELAY];
     if (configs[CLEAR_CLIPBOARD] ?? false) {
-      /// TODO: Should provide seconds
-      clearClipboard();
+      clearClipboard(seconds: cleanupDelay);
     }
   }
 
