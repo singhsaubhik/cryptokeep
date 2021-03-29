@@ -1,8 +1,10 @@
+import 'package:cryptokeep/controller/app_controller.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
+import 'package:cryptokeep/utils/common.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:cryptokeep/utils/encryption.dart';
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class SettingsController extends GetxController {
@@ -10,8 +12,8 @@ class SettingsController extends GetxController {
   var darkMode = true.obs;
   var blockScreenshot = true.obs;
   var clearClipboard = false.obs;
-
   var cleanupDelay = 30.obs;
+  var autoLock = false.obs;
 
   var configBox;
 
@@ -25,6 +27,7 @@ class SettingsController extends GetxController {
     blockScreenshot.value = configs[DISABLE_SCREEN_CAPTURE];
     clearClipboard.value = configs[CLEAR_CLIPBOARD];
     cleanupDelay.value = configs[CLEAN_UP_DELAY];
+    autoLock.value = configs[AUTO_LOCK];
 
     super.onInit();
   }
@@ -39,10 +42,21 @@ class SettingsController extends GetxController {
 
   void setDarkMode(bool value) {
     darkMode.value = value;
+    var appController = Get.find<AppController>();
+    appController.setIsDarkTheme(value);
+    final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    final newConfigs = Map.from(configs);
+    newConfigs[IS_DARK_THEME] = value;
+    configBox.put(CONFIGS, newConfigs);
   }
 
-  void blockScreenShots(bool value) {
+  void blockScreenShots(bool value) async{
     blockScreenshot.value = value;
+    final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    final newConfigs = Map.from(configs);
+    newConfigs[DISABLE_SCREEN_CAPTURE] = value;
+    configBox.put(CONFIGS, newConfigs);
+    setScreenCapture(value);
   }
 
   void setClearClipboard(bool val) {
@@ -50,6 +64,14 @@ class SettingsController extends GetxController {
     final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
     final newConfigs = Map.from(configs);
     newConfigs[CLEAR_CLIPBOARD] = val;
+    configBox.put(CONFIGS, newConfigs);
+  }
+
+  void setAutoLock(bool val) {
+    autoLock.value = val;
+    final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
+    final newConfigs = Map.from(configs);
+    newConfigs[AUTO_LOCK] = val;
     configBox.put(CONFIGS, newConfigs);
   }
 
