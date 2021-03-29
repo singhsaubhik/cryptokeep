@@ -24,6 +24,8 @@ class MyApp extends GetView<AppController> {
   // This widget is the root of your application.
   final isUser;
   final controller = Get.put(AppController());
+  final isDarkTheme = Hive.box<dynamic>(SETTINGS_CONFIG_BOX)
+      .get(CONFIGS, defaultValue: DEFAULT_CONFIGS)[IS_DARK_THEME];
 
   MyApp(this.isUser);
 
@@ -31,13 +33,12 @@ class MyApp extends GetView<AppController> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'CryptoKeep',
-      theme: ThemeData.light(),
+      theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode:
-          controller.isDarkTheme.value ? ThemeMode.dark : ThemeMode.light,
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       routes: appRoutes,
       initialRoute: isUser == null ? "/get_started" : "/splash",
-      // initialRoute: "/get_started",
+      // initialRoute: "/home",
     );
   }
 }
