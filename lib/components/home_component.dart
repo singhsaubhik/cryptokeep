@@ -121,7 +121,7 @@ class PasswordCard extends StatelessWidget {
             )
           ],
         ),
-        color: kInactiveCardColour,
+        color: Theme.of(context).cardColor,
       ),
     );
   }
