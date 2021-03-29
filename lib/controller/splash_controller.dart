@@ -28,6 +28,7 @@ class SplashController extends GetxController {
     final user = Hive.box<dynamic>(USER_BOX).get(IS_USER);
     final userPassword = EncryptionService().decrypt(user[MASTER_PASSWORD]);
     final context = Get.context;
+    final args = Get.arguments;
 
     if (val.isEmpty) return "Please enter password";
 
@@ -35,17 +36,22 @@ class SplashController extends GetxController {
       AppSnackBar.show(context, text: "Incorrect password");
       return "Incorrect password";
     }
-    Navigator.pushReplacementNamed(context, "/home");
+
+    masterPasswordController.text = "";
+    Navigator.pushReplacementNamed(context, args != null ? args : "/home");
     return null;
   }
 
   void loginWithFP({isAppStart = false}) async {
     final context = Get.context;
+    final args = Get.arguments;
+
     if (configs[LOGIN_WITH_FP]) {
       final isAuthenticated = await AppAuthentication().initAuth();
 
       if (isAuthenticated) {
-        Navigator.pushReplacementNamed(context, "/home");
+        masterPasswordController.text = "";
+        Navigator.pushReplacementNamed(context, args != null ? args : "/home");
       }
     } else if (!isAppStart) {
       AppSnackBar.show(context, text: "Login with FingerPrint is disabled");
