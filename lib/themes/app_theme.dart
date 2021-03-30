@@ -6,15 +6,28 @@ class AppTheme {
   static final accentColor = Colors.blue.shade200;
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
-      primaryColor: kPrimaryColor,
-      accentColor: accentColor,
-      floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: kAccentColor),
-      scaffoldBackgroundColor: kScaffoldBackgroundColor,
+    primaryColor: kPrimaryColor,
+    accentColor: accentColor,
+    backgroundColor: kInactiveCardColour,
+    floatingActionButtonTheme:
+        FloatingActionButtonThemeData(backgroundColor: kAccentColor),
+    scaffoldBackgroundColor: kScaffoldBackgroundColor,
+    appBarTheme: AppBarTheme(
+      color: kInactiveCardColour,
+      elevation: 0,
+    ),
+    cardColor: kInactiveCardColour,
+  );
+
+  static ThemeData lightTheme = ThemeData.light().copyWith(
+      primaryColor: Colors.blue,
+      accentColor: Colors.blue,
+      scaffoldBackgroundColor: Colors.grey.shade300,
       appBarTheme: AppBarTheme(
-        color: kInactiveCardColour,
         elevation: 0,
-      ));
+        backgroundColor: Colors.blue,
+      ),
+      cardColor: Colors.blue.shade300);
 
   static AppBar customAppBar = AppBar(
     backgroundColor: bgColor,

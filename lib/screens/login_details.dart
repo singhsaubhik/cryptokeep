@@ -49,7 +49,6 @@ class _LoginDetailsPanel extends GetView<LoginDetailsController> {
           TextFormField(
             readOnly: true,
             controller: TextEditingController(text: _login.username),
-            style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.verified_user,
@@ -73,7 +72,6 @@ class _LoginDetailsPanel extends GetView<LoginDetailsController> {
               obscureText: !controller.showPassword.value,
               readOnly: true,
               controller: TextEditingController(text: _login.password),
-              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.lock,
@@ -206,9 +204,6 @@ class BuildIconWithText extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
-            color: Colors.white.withOpacity(.8),
-          ),
         ),
         SizedBox(
           height: 5,

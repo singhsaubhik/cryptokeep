@@ -35,9 +35,9 @@ class Settings extends GetView<SettingsController> {
                       icon: Icons.lock,
                     ),
                   ),
-                  Divider(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
+                  // Divider(
+                  //   color: Theme.of(context).scaffoldBackgroundColor,
+                  // ),
                   SettingItem2(
                     title: "Login with fingerprint",
                     icon: Icons.fingerprint,
@@ -55,6 +55,12 @@ class Settings extends GetView<SettingsController> {
                     icon: Icons.stop_screen_share_outlined,
                     value: controller.blockScreenshot.value,
                     onChange: (v) => controller.blockScreenShots(v),
+                  ),
+                  SettingItem2(
+                    title: "Auto Lock",
+                    icon: Icons.phonelink_lock,
+                    value: controller.autoLock.value,
+                    onChange: (v) => controller.setAutoLock(v),
                   ),
                   Divider(
                     color: Theme.of(context).scaffoldBackgroundColor,

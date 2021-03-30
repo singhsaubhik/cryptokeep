@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
           primary: false,
           title: Text("Home"),
           titleSpacing: 24,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
             IconButton(

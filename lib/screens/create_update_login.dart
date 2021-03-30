@@ -125,7 +125,6 @@ class _CreateUpdateInput extends StatelessWidget {
       controller: _controller,
       obscureText: this.obscureText,
       validator: (v) => validator(v),
-      style: TextStyle(color: Colors.white),
       decoration: AppTheme.textFieldDecoration.copyWith(
         hintText: this.hintText,
         prefixIcon: Icon(
@@ -133,7 +132,6 @@ class _CreateUpdateInput extends StatelessWidget {
         ),
         hintStyle: TextStyle(
           fontSize: 14,
-          color: Colors.white38,
         ),
       ),
     );

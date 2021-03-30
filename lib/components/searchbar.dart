@@ -1,5 +1,4 @@
 import 'package:cryptokeep/controller/home_controller.dart';
-import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,7 @@ class SearchBar extends GetView<HomeController> {
       width: MediaQuery.of(context).size.width * .9,
       padding: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-          color: kInactiveCardColour,
+          color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(5))),
       child: Row(
         children: [
