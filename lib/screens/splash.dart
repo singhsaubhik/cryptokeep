@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 
 class SplashScreen extends StatelessWidget {
   final controller = Get.put(SplashController());
-  final shouldPop = Get.arguments ?? true;
+  final arguments = Get.arguments ?? {};
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => shouldPop,
+      onWillPop: () async => arguments["currentRoute"] ?? true,
       child: SafeArea(
         child: Scaffold(
           body: Container(
