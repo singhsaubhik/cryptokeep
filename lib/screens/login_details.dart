@@ -9,7 +9,8 @@ class LoginDetails extends GetView<LoginDetailsController> {
 
   @override
   Widget build(BuildContext context) {
-    final _login = controller.getLoginById();
+    // final _login = controller.getLoginById();
+    final Login _login = Get.routing.args;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
