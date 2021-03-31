@@ -41,6 +41,7 @@ class AppController extends SuperController {
   @override
   void onResumed() {
     String currentRoute = Get.currentRoute;
+    final args = Get.routing.args;
     final box = Hive.box<dynamic>(SETTINGS_CONFIG_BOX);
     configs = box.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
     var autoLock = configs[AUTO_LOCK];
@@ -48,7 +49,7 @@ class AppController extends SuperController {
       Navigator.pushReplacementNamed(
         Get.context,
         "/splash",
-        arguments: currentRoute,
+        arguments: {"currentRoute": currentRoute, "args": args},
       );
     }
   }
