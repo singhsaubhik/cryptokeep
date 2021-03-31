@@ -1,5 +1,3 @@
-import 'package:cryptokeep/controller/home_controller.dart';
-import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
@@ -10,16 +8,6 @@ class LoginDetailsController extends GetxController {
 
   void toggleShowPassword() {
     showPassword.value = !showPassword.value;
-  }
-
-  void onEditClick(Login login) {
-    print(login.title);
-  }
-
-  Login getLoginById() {
-    final homeController = Get.find<HomeController>();
-    final String id = Get.routing.args;
-    return homeController.getItemById(id);
   }
 
   void onCopyClick(String data, int type) async {
