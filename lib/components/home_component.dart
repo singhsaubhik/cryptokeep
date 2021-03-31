@@ -54,8 +54,7 @@ class PasswordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        unfocusAndNavigate(context, "/login_details",
-            arguments: this._login.id);
+        unfocusAndNavigate(context, "/login_details", arguments: this._login);
       },
       onLongPress: () {
         showModalBottomSheet(
