@@ -50,7 +50,7 @@ class SettingsController extends GetxController {
     configBox.put(CONFIGS, newConfigs);
   }
 
-  void blockScreenShots(bool value) async{
+  void blockScreenShots(bool value) async {
     blockScreenshot.value = value;
     final configs = configBox.get(CONFIGS, defaultValue: DEFAULT_CONFIGS);
     final newConfigs = Map.from(configs);
