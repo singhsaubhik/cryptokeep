@@ -28,7 +28,9 @@ class SplashController extends GetxController {
     final user = Hive.box<dynamic>(USER_BOX).get(IS_USER);
     final userPassword = EncryptionService().decrypt(user[MASTER_PASSWORD]);
     final context = Get.context;
-    final args = Get.arguments;
+    final arguments = Get.arguments ?? {};
+    final route = arguments["currentRoute"] ?? "/home";
+    final args = arguments["args"];
 
     if (val.isEmpty) return "Please enter password";
 
@@ -38,7 +40,7 @@ class SplashController extends GetxController {
     }
 
     masterPasswordController.text = "";
-    Navigator.pushReplacementNamed(context, args != null ? args : "/home");
+    Navigator.pushReplacementNamed(context, route, arguments: args);
     return null;
   }
 
