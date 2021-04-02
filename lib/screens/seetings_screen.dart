@@ -44,12 +44,12 @@ class Settings extends GetView<SettingsController> {
                     value: controller.loginWithFingerPrint.value,
                     onChange: (v) => controller.setLoginWithFingerprint(v),
                   ),
-                  SettingItem2(
-                    title: "Dark Mode",
-                    icon: Icons.brightness_2_outlined,
-                    value: controller.darkMode.value,
-                    onChange: (v) => controller.setDarkMode(v),
-                  ),
+                  // SettingItem2(
+                  //   title: "Dark Mode",
+                  //   icon: Icons.brightness_2_outlined,
+                  //   value: controller.darkMode.value,
+                  //   onChange: (v) => controller.setDarkMode(v),
+                  // ),
                   SettingItem2(
                     title: "Block Screenshots",
                     icon: Icons.stop_screen_share_outlined,
@@ -86,6 +86,8 @@ class Settings extends GetView<SettingsController> {
                       ),
                     ),
                   ),
+
+                  Divider(),
 
                   SettingItem(
                     title: "Delete All Data",
