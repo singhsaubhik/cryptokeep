@@ -51,20 +51,17 @@ This is password manager for all your password needs, this stores your password 
 ## Screenshots
 <img src="assets/screenshots/img1.png" alt="screen1">
 <br />
-<br />
 <img src="assets/screenshots/img2.png" alt="screen2">
-<br />
 <br />
 <img src="assets/screenshots/img3.png" alt="screen3">
 <br />
-<br />
 <img src="assets/screenshots/img4.png" alt="screen4">
-<br />
 <br />
 <img src="assets/screenshots/img5.png" alt="screen5">
 <br />
-<br />
 <img src="assets/screenshots/img6.png" alt="screen6">
+<br />
+<img src="assets/screenshots/img7.png" alt="screen6">
 
 
 <br />
