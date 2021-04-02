@@ -4,6 +4,7 @@ import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:cryptokeep/utils/constants.dart';
 
 class HomePage extends StatelessWidget {
   final controller = Get.put(HomeController());
@@ -33,7 +34,10 @@ class HomePage extends StatelessWidget {
             visible: controller.showAddButton.value,
             child: FloatingActionButton(
               onPressed: () => unfocusAndNavigate(context, "/create"),
-              child: Icon(Icons.add),
+              child: Icon(
+                Icons.add,
+                color: kIconColor,
+              ),
             ),
           );
         }),

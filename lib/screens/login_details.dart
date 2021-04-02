@@ -20,7 +20,10 @@ class LoginDetails extends GetView<LoginDetailsController> {
           onPressed: () {
             Navigator.pushNamed(context, "/update", arguments: _login);
           },
-          child: Icon(Icons.edit),
+          child: Icon(
+            Icons.edit,
+            color: kIconColor,
+          ),
         ),
         body: Column(
           children: [
@@ -162,16 +165,18 @@ class TopSecondPanel extends StatelessWidget {
         children: [
           BuildIconWithText(
             "Category",
-            Icon(
-              Icons.account_tree_sharp,
-              color: Theme.of(context).accentColor,
-              size: 30,
+            Text(
+              "Login",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
             ),
           ),
           BuildIconWithText(
             "Password Score",
             Text(
-              "100 %",
+              "10 / 10",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
