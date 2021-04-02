@@ -5,7 +5,8 @@ const kScaffoldBackgroundColor = Color(0xFF0A0E21);
 const kActiveCardColour = Color(0xFF1D1E33);
 // const kInactiveCardColour = Color(0xFF111328);
 const kInactiveCardColour = Color(0xFF1D1E33);
-const kAccentColor = Color(0xFF6dd5ed);
+const kAccentColor = Colors.blueAccent;
+const kIconColor = Colors.white;
 
 /// Configs constants
 const IS_FIRST_RUN = "isFirstRun";
