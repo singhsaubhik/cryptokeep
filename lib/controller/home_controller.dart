@@ -122,4 +122,14 @@ class HomeController extends GetxController {
     isLoading.value = false;
     AppSnackBar.show(context, text: "Login deleted successfully");
   }
+
+  void deleteAll() async {
+    isLoading.value = true;
+    await DBHelper.instance.deleteAll();
+    loginList.clear();
+    _initialList.clear();
+    await Future.delayed(Duration(milliseconds: 150));
+    isLoading.value = false;
+    AppSnackBar.show(Get.context, text: "All logins deleted succesfully");
+  }
 }

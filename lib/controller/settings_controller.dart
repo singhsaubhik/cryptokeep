@@ -1,4 +1,5 @@
 import 'package:cryptokeep/controller/app_controller.dart';
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:cryptokeep/utils/constants.dart';
@@ -8,6 +9,10 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
 class SettingsController extends GetxController {
+  /////////////////////////////////////////////////
+  /// Controllers and from global keys
+  ///
+  ////////////////////////////////////////////////
   var loginWithFingerPrint = false.obs;
   var darkMode = true.obs;
   var blockScreenshot = true.obs;
@@ -107,5 +112,10 @@ class SettingsController extends GetxController {
     final newConfigs = Map.from(configs);
     newConfigs[CLEAN_UP_DELAY] = value;
     configBox.put(CONFIGS, newConfigs);
+  }
+
+  void deleteAll() {
+    final homeController = Get.find<HomeController>();
+    homeController.deleteAll();
   }
 }

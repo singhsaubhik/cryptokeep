@@ -86,6 +86,20 @@ class Settings extends GetView<SettingsController> {
                       ),
                     ),
                   ),
+
+                  SettingItem(
+                    title: "Delete All Data",
+                    icon: Icons.block,
+                    backgroundColor: Colors.redAccent,
+                    onClick: () {
+                      return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return DeleteAllLogins();
+                        },
+                      );
+                    },
+                  )
                 ],
               );
             },
@@ -99,25 +113,37 @@ class Settings extends GetView<SettingsController> {
 class SettingItem extends StatelessWidget {
   final String title;
   final IconData icon;
+  final Color backgroundColor;
+  final Function onClick;
 
-  const SettingItem({@required this.title, this.icon});
+  const SettingItem({
+    @required this.title,
+    this.icon,
+    this.backgroundColor,
+    this.onClick,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).appBarTheme.backgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-      child: Row(
-        children: [
-          Icon(icon),
-          SizedBox(
-            width: 10,
-          ),
-          Text(
-            title,
-            style: TextStyle(fontSize: 18),
-          )
-        ],
+    return GestureDetector(
+      onTap: onClick,
+      child: Container(
+        color: backgroundColor != null
+            ? backgroundColor
+            : Theme.of(context).appBarTheme.backgroundColor,
+        padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        child: Row(
+          children: [
+            Icon(icon),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 18),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -243,6 +269,47 @@ class ChangeCleanupTime extends GetView<SettingsController> {
             Navigator.pop(context);
           },
           child: Text("Ok"),
+        ),
+      ],
+    );
+  }
+}
+
+class DeleteAllLogins extends GetView<SettingsController> {
+  final _key = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Delet All Logins"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+              "All logins will be delete permanently, please type 'confirm' \in the box below to proceed"),
+          Form(
+            key: _key,
+            child: TextFormField(
+              validator: (String text) {
+                return text == "confirm" ? null : "Please enter 'confirm'";
+              },
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        MaterialButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        MaterialButton(
+          onPressed: () {
+            if (!_key.currentState.validate()) return;
+            controller.deleteAll();
+            Navigator.pop(context);
+          },
+          child: Text("Delete All"),
+          color: Colors.redAccent,
         ),
       ],
     );
