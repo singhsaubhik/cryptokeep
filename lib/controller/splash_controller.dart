@@ -46,14 +46,17 @@ class SplashController extends GetxController {
 
   void loginWithFP({isAppStart = false}) async {
     final context = Get.context;
-    final args = Get.arguments;
+    // final args = Get.arguments;
+    final arguments = Get.arguments ?? {};
+    final route = arguments["currentRoute"] ?? "/home";
+    final args = arguments["args"];
 
     if (configs[LOGIN_WITH_FP]) {
       final isAuthenticated = await AppAuthentication().initAuth();
 
       if (isAuthenticated) {
         masterPasswordController.text = "";
-        Navigator.pushReplacementNamed(context, args != null ? args : "/home");
+        Navigator.pushReplacementNamed(context, route, arguments: args);
       }
     } else if (!isAppStart) {
       AppSnackBar.show(context, text: "Login with FingerPrint is disabled");
