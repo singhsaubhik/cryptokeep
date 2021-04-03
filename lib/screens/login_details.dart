@@ -29,7 +29,9 @@ class LoginDetails extends GetView<LoginDetailsController> {
           children: [
             BuildTopTitle(_login),
             SizedBox(height: 5),
-            TopSecondPanel(login: _login,),
+            TopSecondPanel(
+              login: _login,
+            ),
             SizedBox(height: 20),
             _LoginDetailsPanel(_login)
           ],
