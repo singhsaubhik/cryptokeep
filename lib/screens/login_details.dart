@@ -29,7 +29,7 @@ class LoginDetails extends GetView<LoginDetailsController> {
           children: [
             BuildTopTitle(_login),
             SizedBox(height: 5),
-            TopSecondPanel(),
+            TopSecondPanel(login: _login,),
             SizedBox(height: 20),
             _LoginDetailsPanel(_login)
           ],
@@ -150,9 +150,8 @@ class BuildTopTitle extends StatelessWidget {
 }
 
 class TopSecondPanel extends StatelessWidget {
-  const TopSecondPanel({
-    Key key,
-  }) : super(key: key);
+  final Login login;
+  const TopSecondPanel({@required this.login});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +165,7 @@ class TopSecondPanel extends StatelessWidget {
           BuildIconWithText(
             "Category",
             Text(
-              "Login",
+              login.category,
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
