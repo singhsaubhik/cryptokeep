@@ -49,6 +49,7 @@ class Login {
       name: map["title"],
       username: map["username"],
       password: map["password"],
+      category: map["category"],
     );
   }
 

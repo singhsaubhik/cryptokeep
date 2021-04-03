@@ -47,6 +47,7 @@ class CreateUpdatePage extends GetView<CreateUpdateController> {
 
 class _CreateUpdateActions extends GetView<CreateUpdateController> {
   final Login _login;
+
   const _CreateUpdateActions(this._login);
 
   @override
@@ -100,9 +101,57 @@ class _CreateUpdateForm extends GetView<CreateUpdateController> {
             prefixIcon: Icons.lock,
             validator: (v) => controller.passwordValidator(v),
           ),
+          SizedBox(height: 10),
+          CategoryDropdown(),
           SizedBox(
             height: 25,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryDropdown extends GetView<CreateUpdateController> {
+  const CategoryDropdown({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Colors.blueGrey,
+      )),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Please select a category",
+            style: TextStyle(color: Colors.white54),
+          ),
+          Obx(() {
+            return DropdownButton<String>(
+              elevation: 2,
+              isExpanded: true,
+              value: controller.category.value,
+              items: <String>["Login", "Social Media", "Finance", "Other"]
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                  ),
+                );
+              }).toList(),
+              hint: Text(
+                "Please choose category",
+              ),
+              onChanged: (String v) => controller.onSelectCategory(v),
+            );
+          }),
         ],
       ),
     );
