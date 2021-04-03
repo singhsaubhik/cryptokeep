@@ -4,11 +4,19 @@ import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+const DEFAULT_CATEGORY = "Login";
+
 class CreateUpdateController extends GetxController {
   final titleController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  ///////////////////////////////////////////
+  /// States ///////////////////////////////
+  var category = DEFAULT_CATEGORY.obs;
+
+  //////////////////////////////////////////
 
   LoginAction action;
   String id;
@@ -34,6 +42,7 @@ class CreateUpdateController extends GetxController {
       titleController.text = login.title;
       usernameController.text = login.username;
       passwordController.text = login.password;
+      category.value = login.category;
     }
   }
 
@@ -42,7 +51,8 @@ class CreateUpdateController extends GetxController {
     var value = {
       "title": titleController.value.text,
       "username": usernameController.value.text,
-      "password": passwordController.value.text
+      "password": passwordController.value.text,
+      "category": category.value
     };
 
     if (!formKey.currentState.validate()) return;
@@ -75,5 +85,9 @@ class CreateUpdateController extends GetxController {
       return "Password length should be between 6-128 chars";
 
     return null;
+  }
+
+  void onSelectCategory(String val) {
+    category.value = val;
   }
 }
