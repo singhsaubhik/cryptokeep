@@ -1,7 +1,6 @@
 import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
-import 'package:cryptokeep/utils/encryption.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -32,13 +31,9 @@ class HomeController extends GetxController {
     var response = await DBHelper.instance.getAll();
 
     for (var v in response) {
-      loginList.add(Login.fromMap(v));
-      _initialList.add(Login.fromMap(v));
-    }
-
-    /// Decrypt password before making it object
-    for (final obj in loginList) {
-      obj.password = EncryptionService().decrypt(obj.password);
+      var _login = Login.fromMap(v, decryptPassword: true);
+      loginList.add(_login);
+      _initialList.add(_login);
     }
     isLoading.value = false;
   }
