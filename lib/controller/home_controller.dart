@@ -1,7 +1,6 @@
 import 'package:cryptokeep/dao/dao.dart';
 import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
-import 'package:cryptokeep/utils/encryption.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
