@@ -91,9 +91,9 @@ class CreateUpdateController extends GetxController {
     category.value = val;
   }
 
-  void onGeneratePasswordClick() async{
+  void onGeneratePasswordClick() async {
     var genPass = await Navigator.pushNamed(Get.context, "/password_generate");
-    if (genPass != null){
+    if (genPass != null) {
       passwordController.clear();
       passwordController.text = genPass;
     }
