@@ -35,6 +35,12 @@ class CreateUpdatePage extends GetView<CreateUpdateController> {
               children: [
                 SizedBox(height: 20),
                 _CreateUpdateForm(),
+                MaterialButton(
+                  minWidth: double.infinity,
+                  onPressed: () async => controller.onGeneratePasswordClick(),
+                  child: Text("Generate password"),
+                  color: Theme.of(context).appBarTheme.backgroundColor,
+                ),
                 _CreateUpdateActions(_login)
               ],
             ),
