@@ -135,11 +135,15 @@ class PasswordTextWidget extends GetView<PasswordGeneratorController> {
         Obx(() {
           return Text(
             controller.password.value,
-            style: TextStyle(fontSize: 30,),
+            style: TextStyle(
+              fontSize: 30,
+            ),
             textAlign: TextAlign.center,
           );
         }),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
