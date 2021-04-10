@@ -42,7 +42,7 @@ class PasswordGeneratorController extends GetxController {
     password.value = pass;
   }
 
-  void onCopyClick(){
+  void onCopyClick() {
     ClipBoardManager().copyToClipboard(this.password.value);
     AppSnackBar.show(Get.context, text: "Copied to clipboard");
   }
