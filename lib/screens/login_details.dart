@@ -151,7 +151,7 @@ class BuildTopTitle extends StatelessWidget {
   }
 }
 
-class TopSecondPanel extends StatelessWidget {
+class TopSecondPanel extends GetView<LoginDetailsController> {
   final Login login;
   const TopSecondPanel({@required this.login});
 
@@ -177,7 +177,7 @@ class TopSecondPanel extends StatelessWidget {
           BuildIconWithText(
             "Password Score",
             Text(
-              "10 / 10",
+              "${controller.getScore(login.password)} / 10",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
