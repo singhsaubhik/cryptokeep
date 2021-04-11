@@ -38,6 +38,7 @@ dependencies:
   uuid: ^2.2.2
   hive:
   get: ^3.26.0
+  password_strength: ^0.2.0
 
 
 dev_dependencies:
