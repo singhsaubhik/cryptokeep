@@ -1,3 +1,4 @@
+import 'package:cryptokeep/services/password_service.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
@@ -15,5 +16,9 @@ class LoginDetailsController extends GetxController {
     clipboardManager.copyToClipboard(data);
     String msg = type == 0 ? USERNAME_COPIED : PASSWORD_COPIED;
     AppSnackBar.show(Get.context, text: msg);
+  }
+
+  int getScore(String password){
+    return PasswordService.calculateScore(password).ceil();
   }
 }
