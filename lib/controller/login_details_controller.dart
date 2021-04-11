@@ -18,7 +18,7 @@ class LoginDetailsController extends GetxController {
     AppSnackBar.show(Get.context, text: msg);
   }
 
-  int getScore(String password){
+  int getScore(String password) {
     return PasswordService.calculateScore(password).ceil();
   }
 }
