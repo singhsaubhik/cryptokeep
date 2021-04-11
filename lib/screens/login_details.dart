@@ -15,6 +15,13 @@ class LoginDetails extends GetView<LoginDetailsController> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: kInactiveCardColour,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+              Get.delete<LoginDetailsController>();
+            },
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -153,6 +160,7 @@ class BuildTopTitle extends StatelessWidget {
 
 class TopSecondPanel extends GetView<LoginDetailsController> {
   final Login login;
+
   const TopSecondPanel({@required this.login});
 
   @override
