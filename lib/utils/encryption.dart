@@ -1,7 +1,13 @@
 import 'package:encrypt/encrypt.dart';
 
+/// Provide ENCRYPTION_KEY as env
+const _key = String.fromEnvironment(
+  "ENCRYPTION_KEY",
+  defaultValue: "kjkDSAFS34234SDFSXSWWWqaSwerty67",
+);
+
 class EncryptionService {
-  final _encryptionKey = Key.fromUtf8("kjkDSAFS34234SDFSXSWWWqaSwerty67");
+  final _encryptionKey = Key.fromUtf8(_key);
   final _iv = IV.fromLength(16);
   Encrypter _encrypter;
 
