@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:password_strength/password_strength.dart';
+
 class PasswordService {
   static const _kSpecialChars = "@#\$%&!<>~^(){}|?";
   static const _numbers = "0123456789";
@@ -53,5 +55,10 @@ class PasswordService {
     }
 
     return result;
+  }
+
+  static double calculateScore(String password) {
+    double strength = estimatePasswordStrength(password);
+    return (strength * 10);
   }
 }
