@@ -1,8 +1,12 @@
+import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/repository/repository.dart';
+import 'package:cryptokeep/utils/app_snackbar.dart';
+import 'package:cryptokeep/utils/clipboard_manager.dart';
+import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BottomSheetLayout extends StatelessWidget {
+class BottomSheetLayout extends GetView<HomeController> {
   BottomSheetLayout(this._password);
 
   final Login _password;
@@ -10,14 +14,20 @@ class BottomSheetLayout extends StatelessWidget {
   void _handleItemClick(BuildContext context, String type, Login login) {
     switch (type) {
       case "Delete":
-        Navigator.of(context).pop();
-        Repository.instance(context).handleDeleteCard(login);
+        controller.handleDeleteCard(context, login);
         break;
 
       case "Edit":
         Navigator.of(context).pop();
         Navigator.pushNamed(context, "/update", arguments: this._password);
         break;
+
+      case "Copy":
+        ClipBoardManager().copyToClipboard(login.password);
+        AppSnackBar.show(context, text: PASSWORD_COPIED);
+        Navigator.of(context).pop();
+        break;
+
       default:
         Navigator.of(context).pop();
     }

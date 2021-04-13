@@ -5,6 +5,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+const PASSWORD = "password";
+
 class DBHelper {
   static final _databaseName = "cryptokeep.db";
   static final _databaseVersion = 1;
@@ -74,7 +76,7 @@ class DBHelper {
     table = DBHelper.loginTable,
   }) async {
     Database db = await instance.database;
-    row = encryptRow(row);
+    row[PASSWORD] = EncryptionService().encrypt(row[PASSWORD]);
     return await db.insert(table, row);
   }
 
@@ -85,7 +87,7 @@ class DBHelper {
 
   Future<int> updateOne(String id, Map<String, dynamic> row) async {
     var db = await instance.database;
-    row = encryptRow(row);
+    row[PASSWORD] = EncryptionService().encrypt(row[PASSWORD]);
     return await db.update(
       loginTable,
       row,

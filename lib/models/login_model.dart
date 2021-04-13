@@ -1,3 +1,4 @@
+import 'package:cryptokeep/utils/encryption.dart';
 import 'package:uuid/uuid.dart';
 
 class Login {
@@ -33,11 +34,13 @@ class Login {
     return map;
   }
 
-  Login.fromMap(Map<String, dynamic> map) {
+  Login.fromMap(Map<String, dynamic> map, {decryptPassword = false}) {
     id = map["_id"];
     title = map["title"];
     username = map["username"];
-    password = map["password"];
+    password = decryptPassword
+        ? EncryptionService().decrypt(map["password"])
+        : map["password"];
     category = map["category"];
     createdAt = map["createdAt"];
     updatedAt = map["updatedAt"];
@@ -49,6 +52,7 @@ class Login {
       name: map["title"],
       username: map["username"],
       password: map["password"],
+      category: map["category"],
     );
   }
 

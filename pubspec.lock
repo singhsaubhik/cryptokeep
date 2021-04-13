@@ -71,13 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   encrypt:
     dependency: "direct main"
     description:
@@ -130,6 +123,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.26.0"
   hive:
     dependency: "direct main"
     description:
@@ -165,13 +165,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
-  nested:
-    dependency: transitive
+  password_strength:
+    dependency: "direct main"
     description:
-      name: nested
+      name: password_strength
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
+    version: "0.2.0"
   path:
     dependency: transitive
     description:
@@ -263,13 +263,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.2+3"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -381,5 +374,5 @@ packages:
     source: hosted
     version: "4.5.1"
 sdks:
-  dart: ">=2.12.0-0.0 <3.0.0"
+  dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.22.2"

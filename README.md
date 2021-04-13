@@ -3,6 +3,7 @@
 
 <br />
 
+[![Amazon App Store][amazon-app-store-badge]][amazon-app-store-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
@@ -21,8 +22,6 @@
   <p align="center">
     An awesome password manager for all your password need.
     <br />
-    <a href="https://github.com/singhsaubhik/cryptokeep">View Demo</a>
-    ·
     <a href="https://github.com/singhsaubhik/cryptokeep/issues">Report Bug</a>
     ·
     <a href="https://github.com/singhsaubhik/cryptokeep/issues">Request Feature</a>
@@ -50,22 +49,19 @@ This is password manager for all your password needs, this stores your password 
 
 
 ## Screenshots
-<img src="assets/screenshots/screen1.jpg" alt="screen1" width="768" height="1368">
+<img src="assets/screenshots/img1.png" alt="screen1">
 <br />
+<img src="assets/screenshots/img2.png" alt="screen2">
 <br />
-<img src="assets/screenshots/screen2.jpg" alt="screen2" width="768" height="1368">
+<img src="assets/screenshots/img3.png" alt="screen3">
 <br />
+<img src="assets/screenshots/img4.png" alt="screen4">
 <br />
-<img src="assets/screenshots/screen3.jpg" alt="screen3" width="768" height="1368">
+<img src="assets/screenshots/img5.png" alt="screen5">
 <br />
+<img src="assets/screenshots/img6.png" alt="screen6">
 <br />
-<img src="assets/screenshots/screen4.jpg" alt="screen4" width="768" height="1368">
-<br />
-<br />
-<img src="assets/screenshots/screen5.jpg" alt="screen5" width="768" height="1368">
-<br />
-<br />
-<img src="assets/screenshots/screen6.jpg" alt="screen6" width="768" height="1368">
+<img src="assets/screenshots/img7.png" alt="screen6">
 
 
 <br />
@@ -113,6 +109,7 @@ You will need the following prerequisites to get started
 - [ ] Support for other platforms than Mobile (ie: Desktop)
 - [ ] Save password on cloud (Firebase)
 - [ ] Support dynamic theme for entire application (ie: Dark / Light)
+- [ ] Add unit test
 
 See the [open issues](https://github.com/singhsaubhik/cryptokeep/issues) for a list of proposed features (and known issues).
 
@@ -153,7 +150,7 @@ Email: saubhik.singh01@gmail.com
 * [Font Awesome](https://fontawesome.com/)
 
 ### Libraries / Packages
-* [Provider](https://pub.dev/packages/provider)
+* [GetX](https://pub.dev/packages/get)
 * [local_auth](https://pub.dev/packages/local_auth)
 * [flutter_svg](https://pub.dev/packages/flutter_svg)
 * [sqflite](https://pub.dev/packages/sqflite)
@@ -169,3 +166,5 @@ Email: saubhik.singh01@gmail.com
 [issues-url]: https://github.com/singhsaubhik/cryptokeep/issues
 [license-shield]: https://img.shields.io/github/license/singhsaubhik/cryptokeep.svg?style=for-the-badge
 [license-url]: https://github.com/singhsaubhik/cryptokeep/blob/master/LICENSE
+[amazon-app-store-badge]: https://img.shields.io/badge/Amazon%20Developer-Store-blue.svg?&style=for-the-badge&logo=amazon-aws&logoColor=white
+[amazon-app-store-url]: https://www.amazon.com/gp/product/B08Z7SFQZK

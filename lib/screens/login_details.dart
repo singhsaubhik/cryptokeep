@@ -1,31 +1,44 @@
+import 'package:cryptokeep/controller/login_details_controller.dart';
 import 'package:cryptokeep/models/login_model.dart';
-import 'package:cryptokeep/provider/login_provider.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class LoginDetails extends StatelessWidget {
+class LoginDetails extends GetView<LoginDetailsController> {
+  final controller = Get.put(LoginDetailsController());
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<PasswordProvider>(context);
-    final String id = ModalRoute.of(context).settings.arguments;
-    final Login _login = provider.getItemById(id);
+    // final _login = controller.getLoginById();
+    final Login _login = Get.routing.args;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: kInactiveCardColour,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+              Get.delete<LoginDetailsController>();
+            },
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, "/update", arguments: _login);
           },
-          child: Icon(Icons.edit),
+          child: Icon(
+            Icons.edit,
+            color: kIconColor,
+          ),
         ),
         body: Column(
           children: [
             BuildTopTitle(_login),
             SizedBox(height: 5),
-            TopSecondPanel(),
+            TopSecondPanel(
+              login: _login,
+            ),
             SizedBox(height: 20),
             _LoginDetailsPanel(_login)
           ],
@@ -35,17 +48,10 @@ class LoginDetails extends StatelessWidget {
   }
 }
 
-class _LoginDetailsPanel extends StatefulWidget {
-  const _LoginDetailsPanel(this._login);
-
+class _LoginDetailsPanel extends GetView<LoginDetailsController> {
   final Login _login;
 
-  @override
-  __LoginDetailsPanelState createState() => __LoginDetailsPanelState();
-}
-
-class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
-  bool showPassword = false;
+  const _LoginDetailsPanel(this._login);
 
   @override
   Widget build(BuildContext context) {
@@ -55,14 +61,16 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
         children: [
           TextFormField(
             readOnly: true,
-            controller: TextEditingController(text: widget._login.username),
-            style: TextStyle(color: Colors.white),
+            controller: TextEditingController(text: _login.username),
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.verified_user,
               ),
-              suffix: Icon(
-                Icons.copy,
+              suffix: GestureDetector(
+                onTap: () => controller.onCopyClick(_login.username, 0),
+                child: Icon(
+                  Icons.copy,
+                ),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -72,43 +80,45 @@ class __LoginDetailsPanelState extends State<_LoginDetailsPanel> {
             ),
           ),
           SizedBox(height: 10),
-          TextFormField(
-            obscureText: !this.showPassword,
-            readOnly: true,
-            controller: TextEditingController(text: widget._login.password),
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.lock,
-              ),
-              suffix: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    },
-                    child: Icon(
-                      showPassword ? Icons.visibility_off : Icons.visibility,
+          Obx(() {
+            return TextFormField(
+              obscureText: !controller.showPassword.value,
+              readOnly: true,
+              controller: TextEditingController(text: _login.password),
+              decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.lock,
+                ),
+                suffix: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GestureDetector(
+                      onTap: () => controller.toggleShowPassword(),
+                      child: Icon(
+                        controller.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
                     ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    GestureDetector(
+                      onTap: () => controller.onCopyClick(_login.password, 1),
+                      child: Icon(
+                        Icons.copy,
+                      ),
+                    ),
+                  ],
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white.withOpacity(.7),
                   ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Icon(
-                    Icons.copy,
-                  ),
-                ],
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(.7),
                 ),
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );
@@ -142,20 +152,16 @@ class BuildTopTitle extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          // Text(
-          //   _login.createdAt,
-          //   style: TextStyle(color: Color(0xFFD7D7D7), fontSize: 16),
-          // ),
         ],
       ),
     );
   }
 }
 
-class TopSecondPanel extends StatelessWidget {
-  const TopSecondPanel({
-    Key key,
-  }) : super(key: key);
+class TopSecondPanel extends GetView<LoginDetailsController> {
+  final Login login;
+
+  const TopSecondPanel({@required this.login});
 
   @override
   Widget build(BuildContext context) {
@@ -168,16 +174,18 @@ class TopSecondPanel extends StatelessWidget {
         children: [
           BuildIconWithText(
             "Category",
-            Icon(
-              Icons.account_tree_sharp,
-              color: Theme.of(context).accentColor,
-              size: 30,
+            Text(
+              login.category,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+              ),
             ),
           ),
           BuildIconWithText(
             "Password Score",
             Text(
-              "100 %",
+              "${controller.getScore(login.password)} / 10",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
@@ -211,9 +219,6 @@ class BuildIconWithText extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(
-            color: Colors.white.withOpacity(.8),
-          ),
         ),
         SizedBox(
           height: 5,
