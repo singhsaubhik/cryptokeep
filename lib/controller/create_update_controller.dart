@@ -52,7 +52,8 @@ class CreateUpdateController extends GetxController {
       "title": titleController.value.text,
       "username": usernameController.value.text,
       "password": passwordController.value.text,
-      "category": category.value
+      "category": category.value,
+      "favorite": 0,
     };
 
     if (!formKey.currentState.validate()) return;
