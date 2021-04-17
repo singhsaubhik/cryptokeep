@@ -3,20 +3,24 @@ import 'package:uuid/uuid.dart';
 
 class Login {
   String id, username, password, category, title, createdAt, updatedAt;
+  bool favorite;
 
-  Login(
-      {id,
-      name,
-      username,
-      password,
-      category = "Login",
-      createdAt,
-      updatedAt}) {
+  Login({
+    id,
+    name,
+    username,
+    password,
+    category = "Login",
+    createdAt,
+    updatedAt,
+    favorite = false,
+  }) {
     this.id = id ?? Uuid().v4().toString();
     this.title = name;
     this.username = username;
     this.password = password;
     this.category = category;
+    this.favorite = favorite;
     this.createdAt = createdAt ?? DateTime.now().toIso8601String();
     this.updatedAt = updatedAt ?? DateTime.now().toIso8601String();
   }
@@ -29,7 +33,8 @@ class Login {
       "password": this.password,
       "category": this.category,
       "createdAt": this.createdAt,
-      "updatedAt": this.updatedAt
+      "updatedAt": this.updatedAt,
+      "favorite": this.favorite ? 1 : 0,
     };
     return map;
   }
@@ -44,6 +49,7 @@ class Login {
     category = map["category"];
     createdAt = map["createdAt"];
     updatedAt = map["updatedAt"];
+    favorite = map["favorite"] == 0 ? false : true;
   }
 
   /// Create object with essentials only ///
@@ -53,6 +59,7 @@ class Login {
       username: map["username"],
       password: map["password"],
       category: map["category"],
+      favorite: map["favorite"] == 0 ? false : true,
     );
   }
 
@@ -60,5 +67,6 @@ class Login {
     this.title = value["title"];
     this.username = value["username"];
     this.password = value["password"];
+    this.favorite = value["favorite"] ?? this.favorite;
   }
 }

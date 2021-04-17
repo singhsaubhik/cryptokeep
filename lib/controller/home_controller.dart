@@ -26,6 +26,12 @@ class HomeController extends GetxController {
     });
   }
 
+  @override
+  void onClose() {
+    scrollController?.dispose();
+    super.onClose();
+  }
+
   void _loadFromDB() async {
     isLoading.value = true;
     var response = await DBHelper.instance.getAll();

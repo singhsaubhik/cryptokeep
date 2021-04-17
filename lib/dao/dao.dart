@@ -20,6 +20,7 @@ class DBHelper {
   static const _category = "category";
   static const _createdAt = "createdAt";
   static const _updatedAt = "updatedAt";
+  static const _favorite = "favorite";
 
   DBHelper._privateConstructor();
 
@@ -49,7 +50,8 @@ class DBHelper {
         $_password TEXT NOT NULL,
         $_category TEXT,
         $_createdAt TEXT,
-        $_updatedAt TEXT
+        $_updatedAt TEXT,
+        $_favorite INTEGER
       )
     ''');
   }
