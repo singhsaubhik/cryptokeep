@@ -192,14 +192,21 @@ class TopSecondPanel extends GetView<LoginDetailsController> {
               ),
             ),
           ),
-          BuildIconWithText(
-            "Favorite",
-            Icon(
-              Icons.favorite,
-              color: Theme.of(context).accentColor,
-              size: 30,
-            ),
-          ),
+          Obx(() {
+            return BuildIconWithText(
+              "Favorite",
+              GestureDetector(
+                onTap: () => controller.toggleFavorite(),
+                child: Icon(
+                  Icons.favorite,
+                  color: controller.favorite.value
+                      ? Theme.of(context).accentColor
+                      : Colors.blueGrey,
+                  size: 30,
+                ),
+              ),
+            );
+          }),
         ],
       ),
     );
