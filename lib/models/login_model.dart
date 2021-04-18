@@ -37,7 +37,7 @@ class Login {
       "favorite": this.favorite ? 1 : 0,
     };
 
-    if(favoriteAsBool){
+    if (favoriteAsBool) {
       map["favorite"] = this.favorite;
     }
 
