@@ -63,7 +63,7 @@ class HomeController extends GetxController {
     await Future.delayed(Duration(milliseconds: 350));
 
     var existingLogin = loginList.firstWhere((e) => e.id == id);
-    existingLogin.update(login.toMap());
+    existingLogin.update(login.toMap(favoriteAsBool: true));
     loginList.refresh();
   }
 

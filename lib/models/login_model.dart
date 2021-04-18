@@ -25,7 +25,7 @@ class Login {
     this.updatedAt = updatedAt ?? DateTime.now().toIso8601String();
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap({bool favoriteAsBool = false}) {
     var map = <String, dynamic>{
       "_id": this.id,
       "title": this.title,
@@ -36,6 +36,11 @@ class Login {
       "updatedAt": this.updatedAt,
       "favorite": this.favorite ? 1 : 0,
     };
+
+    if (favoriteAsBool) {
+      map["favorite"] = this.favorite;
+    }
+
     return map;
   }
 
@@ -67,6 +72,7 @@ class Login {
     this.title = value["title"];
     this.username = value["username"];
     this.password = value["password"];
+    this.category = value["category"] ?? this.category;
     this.favorite = value["favorite"] ?? this.favorite;
   }
 }
