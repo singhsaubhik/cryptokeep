@@ -61,6 +61,8 @@ class CreateUpdateController extends GetxController {
     if (Get.currentRoute == "/create") {
       _controller.add(Login.fromValue(value));
     } else {
+      /// TODO: Dirty hack, please remove
+      value["favorite"] = value["favorite"] == 0 ? false : true;
       login.update(value);
       _controller.updateItem(login.id, login);
     }
