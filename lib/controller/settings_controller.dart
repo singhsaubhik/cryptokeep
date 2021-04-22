@@ -1,4 +1,4 @@
-import 'package:cryptokeep/components/local_path.dart';
+import 'package:cryptokeep/services/local_path.dart';
 import 'package:cryptokeep/controller/app_controller.dart';
 import 'package:cryptokeep/controller/home_controller.dart';
 import 'package:cryptokeep/dao/dao.dart';

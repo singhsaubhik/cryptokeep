@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 class LocalPath {
   LocalPath._privateConstructor();
   static final LocalPath instance = LocalPath._privateConstructor();
-  final String path = "assets";
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
