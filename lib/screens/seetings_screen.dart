@@ -86,6 +86,37 @@ class Settings extends GetView<SettingsController> {
                       ),
                     ),
                   ),
+                  Divider(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  ),
+                  SettingItem(
+                    title: "Export Data",
+                    icon: Icons.north_east,
+                    backgroundColor:
+                        Theme.of(context).appBarTheme.backgroundColor,
+                    onClick: () {
+                      return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ExportAllLogins();
+                        },
+                      );
+                    },
+                  ),
+                  SettingItem(
+                    title: "Import Data",
+                    icon: Icons.south_west,
+                    backgroundColor:
+                        Theme.of(context).appBarTheme.backgroundColor,
+                    onClick: () {
+                      return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return ImportAllLogins();
+                        },
+                      );
+                    },
+                  ),
 
                   Divider(),
 
@@ -282,7 +313,7 @@ class DeleteAllLogins extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Delet All Logins"),
+      title: Text("Delete All Logins"),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -312,6 +343,66 @@ class DeleteAllLogins extends GetView<SettingsController> {
           },
           child: Text("Delete All"),
           color: Colors.redAccent,
+        ),
+      ],
+    );
+  }
+}
+
+class ExportAllLogins extends GetView<SettingsController> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Export All Logins"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+              "All logins will be exported; however, you password will still be encrypted."),
+        ],
+      ),
+      actions: [
+        MaterialButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        MaterialButton(
+          onPressed: () {
+            controller.exportAll();
+            Navigator.pop(context);
+          },
+          child: Text("Confirm"),
+          color: Colors.orangeAccent,
+        ),
+      ],
+    );
+  }
+}
+
+class ImportAllLogins extends GetView<SettingsController> {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text("Import from Exisiting Data"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+              "All logins will be imported. This action will delete all the current passwords."),
+        ],
+      ),
+      actions: [
+        MaterialButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text("Cancel"),
+        ),
+        MaterialButton(
+          onPressed: () {
+            controller.importAll();
+            Navigator.pop(context);
+          },
+          child: Text("Confirm"),
+          color: Colors.orangeAccent,
         ),
       ],
     );

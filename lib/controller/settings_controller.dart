@@ -1,5 +1,8 @@
+import 'package:cryptokeep/services/local_path.dart';
 import 'package:cryptokeep/controller/app_controller.dart';
 import 'package:cryptokeep/controller/home_controller.dart';
+import 'package:cryptokeep/dao/dao.dart';
+import 'package:cryptokeep/models/login_model.dart';
 import 'package:cryptokeep/utils/app_snackbar.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:cryptokeep/utils/constants.dart';
@@ -117,5 +120,32 @@ class SettingsController extends GetxController {
   void deleteAll() {
     final homeController = Get.find<HomeController>();
     homeController.deleteAll();
+  }
+
+  void exportAll() async {
+    List<Map<String, dynamic>> list = await DBHelper.instance.getAll();
+    await LocalPath.instance.writeData(list);
+    AppSnackBar.show(Get.context,
+        text: "Exported everything into 'loginData.json'");
+  }
+
+  void importAll() async {
+    final homeController = Get.find<HomeController>();
+
+    // Retrieve the data into a list
+    List<dynamic> list = await LocalPath.instance.readData();
+
+    if (list != null) {
+      // Delete all the logins
+      homeController.deleteAll();
+
+      // Add the logins back to the database
+      for (int index = 0; index < list.length; index++) {
+        Login tempLogin = Login.fromMap(list[index]);
+        homeController.add(tempLogin);
+      }
+
+      AppSnackBar.show(Get.context, text: "Imported everything successfully");
+    }
   }
 }
