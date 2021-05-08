@@ -11,6 +11,7 @@ class HomeController extends GetxController {
   List<Login> _initialList = [];
   RxList<Login> loginList = RxList<Login>();
   final scrollController = ScrollController();
+  var showFavorites = false.obs;
 
   @override
   void onInit() {
@@ -132,5 +133,19 @@ class HomeController extends GetxController {
     await Future.delayed(Duration(milliseconds: 150));
     isLoading.value = false;
     AppSnackBar.show(Get.context, text: "All logins deleted succesfully");
+  }
+
+  void toggleFavoritesShow(bool value) {
+    List<Login> items = [];
+    if (value) {
+      items =
+          _initialList.where((element) => element.favorite == value).toList();
+    } else {
+      items = _initialList.toList();
+    }
+
+    loginList.clear();
+    loginList.addAll(items);
+    showFavorites.toggle();
   }
 }
