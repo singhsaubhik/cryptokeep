@@ -27,7 +27,9 @@ class BottomSheetLayout extends GetView<HomeController> {
         AppSnackBar.show(context, text: PASSWORD_COPIED);
         Navigator.of(context).pop();
         break;
-
+      case "Share":
+        Navigator.of(context).pop();
+        break;
       default:
         Navigator.of(context).pop();
     }
@@ -45,7 +47,8 @@ class BottomSheetLayout extends GetView<HomeController> {
         children: [
           buildItem(context, Icons.copy, "Copy", _password),
           buildItem(context, Icons.edit, "Edit", _password),
-          buildItem(context, Icons.delete_forever, "Delete", _password)
+          buildItem(context, Icons.delete_forever, "Delete", _password),
+          buildItem(context, Icons.share, "Delete", _password),
         ],
       ),
     );
