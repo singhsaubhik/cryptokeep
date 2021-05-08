@@ -1,6 +1,7 @@
 import 'package:cryptokeep/components/home_component.dart';
 import 'package:cryptokeep/components/searchbar.dart';
 import 'package:cryptokeep/controller/home_controller.dart';
+import 'package:cryptokeep/themes/app_theme.dart';
 import 'package:cryptokeep/utils/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,17 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
+            Obx(() {
+              return Switch(
+                value: controller.showFavorites.value,
+                onChanged: (v) => controller.toggleFavoritesShow(v),
+                activeColor: AppTheme.accentColor,
+                inactiveThumbColor: Colors.white,
+                activeThumbImage: AssetImage("assets/images/activestar.png"),
+                inactiveThumbImage:
+                    AssetImage("assets/images/inactivestar.png"),
+              );
+            }),
             IconButton(
               padding: EdgeInsets.symmetric(horizontal: 20),
               icon: Icon(Icons.settings),
