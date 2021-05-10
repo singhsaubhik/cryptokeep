@@ -35,7 +35,7 @@ My ${_password.title} Details
 User Name: ${_password.username} 
 Password ${_password.password}
 
-Brought to you by Crypto Keep
+Sent from CryptoKeep
 """);
         Navigator.of(context).pop();
         break;
