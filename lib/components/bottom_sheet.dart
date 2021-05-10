@@ -28,6 +28,7 @@ class BottomSheetLayout extends GetView<HomeController> {
         AppSnackBar.show(context, text: PASSWORD_COPIED);
         Navigator.of(context).pop();
         break;
+
       case "Share":
         Share.share("""
 My ${_password.title} Details
