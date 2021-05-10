@@ -33,7 +33,7 @@ class BottomSheetLayout extends GetView<HomeController> {
 My ${_password.title} Details
 
 User Name: ${_password.username} 
-Password ${_password.password}
+Password: ${_password.password}
 
 Sent from CryptoKeep
 """);
