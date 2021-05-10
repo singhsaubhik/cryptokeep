@@ -5,6 +5,7 @@ import 'package:cryptokeep/utils/clipboard_manager.dart';
 import 'package:cryptokeep/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart';
 
 class BottomSheetLayout extends GetView<HomeController> {
   BottomSheetLayout(this._password);
@@ -28,6 +29,17 @@ class BottomSheetLayout extends GetView<HomeController> {
         Navigator.of(context).pop();
         break;
 
+      case "Share":
+        Share.share("""
+My ${_password.title} Details
+
+User Name: ${_password.username} 
+Password: ${_password.password}
+
+Sent from CryptoKeep
+""");
+        Navigator.of(context).pop();
+        break;
       default:
         Navigator.of(context).pop();
     }
@@ -45,7 +57,8 @@ class BottomSheetLayout extends GetView<HomeController> {
         children: [
           buildItem(context, Icons.copy, "Copy", _password),
           buildItem(context, Icons.edit, "Edit", _password),
-          buildItem(context, Icons.delete_forever, "Delete", _password)
+          buildItem(context, Icons.delete_forever, "Delete", _password),
+          buildItem(context, Icons.share, "Share", _password),
         ],
       ),
     );
