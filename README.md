@@ -168,3 +168,7 @@ Email: saubhik.singh01@gmail.com
 [license-url]: https://github.com/singhsaubhik/cryptokeep/blob/master/LICENSE
 [amazon-app-store-badge]: https://img.shields.io/badge/Amazon%20Developer-Store-blue.svg?&style=for-the-badge&logo=amazon-aws&logoColor=white
 [amazon-app-store-url]: https://www.amazon.com/gp/product/B08Z7SFQZK
+
+
+## ⚠️ Disclaimer
+This is a learning project and might not have been tested for production, and may break for you even might not be completly secure.
